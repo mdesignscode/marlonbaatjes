@@ -1,0 +1,82 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.page {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+
+  .hero_title {
+    @include setFlexbox($width: 50%, $height: 100%, $column: true);
+    justify-content: center;
+    align-items: center;
+
+    .Typewriter {
+      width: 100%;
+      .Typewriter__wrapper {
+        .heading {
+          font-size: 38px;
+          font-family: $heading;
+        }
+
+        br {
+          margin-bottom: 0.75em;
+        }
+      }
+    }
+
+    .hero_title__buttons {
+      display: flex;
+      gap: 1em;
+      margin-top: 1em;
+      align-self: flex-start;
+
+      button {
+        @include setButton;
+        opacity: 0;
+
+        &.contact {
+          background-color: $accentOne;
+          box-shadow: inset 0 0 0 2px $accentOne;
+        }
+
+        &.flip {
+          animation: puffIn 1s;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .hero_image {
+    display: grid;
+    place-items: center;
+    width: 40%;
+
+    img {
+      width: 100%;
+      height: auto;
+      opacity: 0;
+      animation: flipInX 1s forwards;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero_title {
+      width: 100%;
+      padding: 1rem 1.5rem;
+
+      .Typewriter {
+        font-size: calc(32px - 40%);
+
+        .heading {
+          font-size: calc(38px - 40%);
+        }
+      }
+    }
+
+    .hero_image {
+      display: none;
+    }
+  }
+}

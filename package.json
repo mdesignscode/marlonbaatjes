@@ -1,0 +1,31 @@
+{
+  "name": "marlonbaatjes",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "css-build": "node-sass --omit-source-map-url app/styles/mystyles.scss app/styles/mystyles.css",
+    "css-watch": "npm run css-build -- --watch",
+    "watch": "npm run css-watch"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "autoprefixer": "^10.4.14",
+    "emailjs-com": "^3.2.0",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "next": "^13.4.12",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.2",
+    "sass": "^1.62.0",
+    "typewriter-effect": "^2.19.0"
+  },
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "node-sass": "^7.0.3"
+  }
+}

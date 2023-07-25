@@ -1,0 +1,12 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations' as *;
+
+.home-page {
+  font-family: $text;
+  @include setFlexbox;
+
+  .script {
+    font-size: 1.25em;
+  }
+}

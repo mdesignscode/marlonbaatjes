@@ -1,0 +1,103 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+@use 'animations' as *;
+@use 'email_form';
+
+.contact-page {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-block: 1rem;
+
+  @media (width < 769px) {
+    flex-direction: column;
+  }
+
+  .external_links {
+    @include setFlexbox($center: true, $column: true);
+
+    @media (width < 769px) {
+      flex-direction: row;
+
+      p {
+        display: none;
+      }
+    }
+
+    .sliding-border {
+      border: 2px solid transparent;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      margin: 10px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+
+      &:nth-of-type(4) {
+        animation-delay: 0.3s;
+      }
+
+      &:nth-of-type(3) {
+        animation-delay: 0.6s;
+      }
+
+      &:nth-of-type(2) {
+        animation-delay: 0.9s;
+      }
+
+      &:nth-of-type(1) {
+        animation-delay: 1.2s;
+      }
+
+      a,
+      span {
+        padding: 10px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        path,
+        svg {
+          color: $primary;
+
+          @media (width < 769px) {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.1);
+        z-index: -1;
+        animation: slideBorder 4s linear infinite;
+
+        &:hover {
+          background-color: $accentOne;
+        }
+      }
+
+      &:hover {
+        border-color: $hover;
+
+        path,
+        svg,
+        p {
+          color: $accentOne;
+        }
+      }
+    }
+
+    span {
+      cursor: pointer;
+    }
+  }
+}

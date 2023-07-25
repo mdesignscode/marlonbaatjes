@@ -1,0 +1,85 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+@use 'animations' as *;
+
+.contact-page {
+  .email_form {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    background-color: $light;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeIn 2s 1s forwards;
+
+    @media (width > 991px) {
+      max-width: 550px;
+    }
+
+    @media (width < 481px) {
+      width: 80%;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .form_field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        input,
+        textarea {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-family: $text;
+          font-size: 16px;
+          color: $dark;
+        }
+
+        span {
+          color: red;
+          margin-top: 5px;
+        }
+      }
+
+      button {
+        padding: 12px;
+        background-color: $primary;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: $heading;
+        font-size: 18px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: $hover;
+        }
+      }
+    }
+
+    .success-message,
+    .error-message {
+      padding: 10px;
+      border-radius: 5px;
+      color: #fff;
+      font-family: $text;
+      font-size: 16px;
+      text-align: center;
+      margin-top: 10px;
+
+      &.success-message {
+        background-color: $accentOne;
+      }
+
+      &.error-message {
+        background-color: $accentTwo;
+      }
+    }
+  }
+}
