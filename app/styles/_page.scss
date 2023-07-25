@@ -56,7 +56,8 @@
     img {
       width: 100%;
       height: auto;
-      animation: flipInY 1.5s forwards;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards;
     }
   }
 
