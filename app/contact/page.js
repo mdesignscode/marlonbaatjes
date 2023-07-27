@@ -47,6 +47,7 @@ const Contact = () => {
       }, 3000);
     } catch (error) {
       // Show error animation for 3 seconds
+      console.log(error)
       setShowError(true);
       setTimeout(() => {
         setShowError(false);
