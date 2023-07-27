@@ -26,11 +26,15 @@ const Contact = () => {
         message: data.message,
       };
 
+      const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+
       await emailjs.send(
-        'service_0kerjni',
-        'template_o4k3x7d',
+        serviceId,
+        templateId,
         templateParams,
-        '8JvwI3MlDOUR0x-Bv'
+        userId
       );
 
       // Reset the form fields after successful submission
