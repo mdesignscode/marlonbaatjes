@@ -1,12 +1,9 @@
 @charset "utf-8";
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .navbar {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  @include setFlexbox(100%, $center: true, $gap: 1rem);
 
   @media (width > 768px) {
     gap: 2rem;
@@ -21,6 +18,11 @@
     position: relative;
     display: inline-block;
     padding-block: 10px;
+    font-size: 1.75rem;
+
+    @media (width < 581px) {
+      font-size: 1.45rem;
+    }
 
     &:hover {
       color: $accentOne;

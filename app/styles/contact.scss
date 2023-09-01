@@ -1,7 +1,7 @@
-@use 'mixins' as *;
-@use 'variables' as *;
-@use 'animations' as *;
-@use 'email_form';
+@use "mixins" as *;
+@use "variables" as *;
+@use "animations" as *;
+@use "email_form";
 
 .contact-page {
   display: flex;
@@ -34,6 +34,10 @@
       opacity: 0;
       animation: fadeIn 2s forwards;
 
+      @media (width > 768px) {
+        min-width: 230px;
+      }
+
       &:nth-of-type(4) {
         animation-delay: 0.3s;
       }
@@ -54,9 +58,14 @@
       span {
         padding: 10px;
         color: #fff;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
         align-items: center;
         gap: 0.5rem;
+
+        @media (width < 769px) {
+          grid-template-columns: 1fr;
+        }
 
         path,
         svg {

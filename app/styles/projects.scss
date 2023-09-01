@@ -1,92 +1,66 @@
-@use 'variables' as *;
-@use 'mixins' as *;
-@use 'carousel';
+@use "variables" as *;
+@use "animations" as *;
+@use "mixins" as *;
+@use 'projectDescription';
+@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 
 .projects-page {
-  overflow: hidden;
+  .container {
+    .content-container {
+      @include setFlexbox($column: true, $gap: 20px);
 
-  // slide container
-  .slider__container {
-
-    // slide
-    &_slide {
-      @include setFlexbox($column: true);
-      gap: 1rem;
-      overflow-y: scroll;
-
-      &Preview {
-        @include setFlexbox;
-        justify-content: space-between;
-        width: 100%;
-
-        img {
-          @include boxSize(48%, auto);
-          border-radius: 4px;
-          opacity: 0;
-          animation: fadeIn 1s forwards;
-
-          &:nth-of-type(1) {
-            animation-delay: 1s;
-          }
-
-          &:nth-of-type(2) {
-            animation-delay: 1.2s;
-          }
+      .project {
+        @mixin transition($property) {
+          transition-property: $property;
+          transition: ease-in-out 0.3s;
         }
 
-        @media (width < 769px) {
-          img {
-            @include boxSize(100%, auto);
-
-            &:nth-of-type(2) {
-              display: none;
-            }
-          }
-        }
-      }
-
-      h1 {
+        @include setFlexbox($column: true, $gap: 15px);
+        @include transition((border-color, padding));
+        border: 2px solid transparent;
+        border-radius: 10px;
         opacity: 0;
-        animation: fadeIn 1s forwards;
-      }
+        animation: 2s forwards;
 
-      &Text {
-        overflow-y: scroll;
-        font-size: 1.2rem;
-
-        p {
-          opacity: 0;
-          animation: fadeIn 1s forwards;
-
-          &:nth-of-type(1) {
-            opacity: 0;
-            animation-delay: 0.2s;
-          }
-
-          &:nth-of-type(2) {
-            opacity: 0;
-            animation-delay: 0.4s;
-          }
+        h2,
+        h3 {
+          @include transition(color);
         }
-      }
-
-      &Buttons {
-        @include setFlexbox($gap: 1rem);
 
         a {
-          button {
-            @include setButton(0.75rem);
-            height: max-content;
-            padding: 1rem;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
+          @include transition(border-color);
+        }
 
-            &:nth-of-type(1) {
-              animation-delay: 0.6s;
-            }
+        &:hover {
+          border-color: $primary;
+          padding: 10px 20px;
 
-            &:nth-of-type(2) {
-              animation-delay: 0.8s;
+          h2,
+          h3 {
+            color: $primary;
+          }
+
+          a {
+            border-color: $primary !important;
+          }
+        }
+
+        .project-title {
+          @include setFlexbox($gap: 30px);
+          flex-wrap: wrap;
+
+          @media (width < 769px) {
+            gap: 10px;
+            flex-direction: column;
+            margin-bottom: 10px;
+          }
+
+          .buttons {
+            display: flex;
+            gap: 15px;
+
+            a {
+              @include setButton(1rem, 20px, 10px);
             }
           }
         }

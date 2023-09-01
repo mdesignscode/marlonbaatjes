@@ -1,0 +1,38 @@
+@use 'variables' as *;
+
+.animated_text {
+  &.bold {
+    font-size: 3.5rem;
+    font-weight: bold;
+  }
+
+  &.small {
+    font-size: 2rem;
+    color: #beb4b4;
+
+    .animate-text,
+    .hover-animate {
+      min-width: 8px;
+    }
+  }
+
+  .hover-animate {
+    display: inline-block;
+    min-width: 10px;
+    cursor: none;
+
+    &:hover {
+      animation: rubberBand 1s;
+      color: $primary;
+    }
+  }
+
+  .animate-text {
+    display: inline-block;
+    opacity: 0;
+    min-width: 10px;
+    animation-name: bounceIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+}

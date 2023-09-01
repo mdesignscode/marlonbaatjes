@@ -1,0 +1,66 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.project-description {
+  @include setFlexbox($gap: 15px);
+  font-size: 1.5rem;
+
+  @media (width < 769px) {
+    font-size: 1.25rem;
+  }
+
+  @media (width < 769px) {
+    flex-direction: column;
+  }
+
+  .description {
+    @include setFlexbox($column: true, $gap: 15px);
+    flex: 1;
+
+    img {
+      height: auto !important;
+
+      @media (width < 481px) {
+        width: 350px;
+      }
+    }
+
+    p {
+      margin-right: 20px;
+    }
+  }
+
+  .more-info {
+    @include setFlexbox($column: true, $gap: 15px);
+    flex: 1;
+
+    h3 {
+      margin-bottom: 10px;
+      font-family: $display;
+    }
+
+    .features-list,
+    .tech-stack-list {
+      display: flex;
+
+      p {
+        font-family: "Poiret One", cursive;
+        font-size: 1.3rem;
+        
+        @media (width < 769px) {
+          font-size: 1.15rem;
+        }
+      }
+    }
+
+    .features-list {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .tech-stack-list {
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  }
+}

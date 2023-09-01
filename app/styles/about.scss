@@ -1,0 +1,82 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+@use 'animations' as *;
+
+.about-page {
+  .container {
+    .content-container {
+      #text-container {
+        @include setFlexbox($gap: 10px, $column: true);
+
+        .about-text {
+          opacity: 0;
+          animation: ease-in-out 1s forwards;
+
+          &:nth-child(2) {
+            animation-delay: 0.5s !important;
+          }
+
+          &:nth-child(3) {
+            animation-delay: 1s !important;
+          }
+        }
+      }
+
+      #stack-container {
+        margin-top: 20px;
+
+        #tech-stack {
+          $accent: #eb5e28;
+          opacity: 0;
+          animation: 1s forwards;
+
+          @include setFlexbox($gap: 20px);
+          flex-wrap: wrap;
+          margin-top: 15px;
+
+          .stack-item {
+            @include setFlexbox(150px, 110px, $column: true);
+            border: 2px solid $accent;
+            border-radius: 5px;
+            border-top-right-radius: 20px;
+            transition-property: background-color, border;
+            transition: ease-in-out 0.3s;
+
+            &:hover {
+              cursor: none;
+              border-color: $light;
+              border-top-right-radius: 5px;
+
+              &:nth-child(even) {
+                background-color: $accentTwo;
+              }
+
+              &:nth-child(odd) {
+                background-color: $primary;
+              }
+
+              #tool-name {
+                border-color: $light;
+              }
+            }
+
+            #tool-name {
+              border-bottom: 2px solid $accent;
+              padding-block: 5px;
+              transition: border-color ease-in-out 0.3s;
+            }
+
+            #tool-icon {
+              height: 100%;
+            }
+
+            #tool-name,
+            #tool-icon {
+              @include setFlexbox($center: true);
+            }
+          }
+        }
+      }
+    }
+  }
+}

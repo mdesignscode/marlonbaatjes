@@ -1,98 +1,89 @@
-'use client';
-import { useRef } from 'react';
-import '@/styles/home.scss';
-import Typewriter from 'typewriter-effect';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTextToSpeech } from '@/context/store';
+"use client";
+import "@/styles/home.scss";
+import Image from "next/image";
+import Link from "next/link";
+import AnimateText from "./AnimateText";
+import { useState, useEffect, useCallback } from "react";
 
-export default function HomePage () {
-  const [setTextToSpeak, voicesLoaded] = useTextToSpeech();
+export default function HomePage() {
+  const [name, setName] = useState("");
+  const [hi, setHi] = useState("");
+  const [profession, setProfession] = useState("");
+  const [roles, setRoles] = useState("");
 
-  const COMMA_PAUSE = 300;
-  const POINT_PAUSE = 600;
+  const handleAnimation = useCallback(() => {
+    const button = document.querySelector(".hero_contact");
+    button.style.animation = "slideUp 1s 1s forwards";
+  }, []);
 
-  const aboutRef = useRef();
-  const contactRef = useRef();
+  useEffect(() => {
+    setHi("Hi,");
+    setName("I'm Marlon Baatjes");
+    setProfession("Full Stack Software Engineer");
+    setRoles("Web Developer | Front-End Engineer");
+  }, []);
 
   return (
-    <article className='home-page page'>
-      <div className='hero_title'>
-        {voicesLoaded ? (
-          <Typewriter
-            options={{
-              deleteSpeed: 1,
-              delay: 35
-            }}
-            onInit={(typewriter) => {
-              typewriter
-                .callFunction(() => setTextToSpeak("Meet Marlon Baatjes"))
-                .typeString('<span class="heading">Meet Marlon Baatjes </span>')
-                .pauseFor(POINT_PAUSE)
-                .typeString('<br/>')
-                .callFunction(() => setTextToSpeak(
-                  "a naturally curious individual and fast learner"
-                ))
-                .typeString('A naturally curious individual and fast learner')
-                .pauseFor(COMMA_PAUSE)
-                .callFunction(() => setTextToSpeak(
-                  "always eager to explore the world of technology."
-                ))
-                .typeString(', always eager to explore the world of technology.')
-                .pauseFor(POINT_PAUSE)
-                .callFunction(() => setTextToSpeak(
-                  "Unleashing his inner IT superhero"
-                ))
-                .typeString(' Unleashing his inner IT superhero')
-                .pauseFor(COMMA_PAUSE)
-                .callFunction(() => setTextToSpeak(
-                  ", Marlon effortlessly navigates through the intricate interfaces of various devices"
-                ))
-                .typeString(', Marlon effortlessly navigates through the intricate interfaces of various devices')
-                .pauseFor(POINT_PAUSE * 2)
-                .callFunction(() => setTextToSpeak(
-                  "making tech magic happen!"
-                ))
-                .typeString(', making tech magic happen!')
-                .pauseFor(POINT_PAUSE)
-                .callFunction(() => setTextToSpeak(
-                  "Let’s explore his fascinating world!"
-                ))
-                .typeString(' Let’s explore his fascinating world!')
-                .callFunction(() => aboutRef.current.classList.add('flip'))
-                .callFunction(() => contactRef.current.classList.add('flip'))
-                .start();
-            }}
-          />) : (
-          <div className="loader">
-            <Image src="/Bean Eater-1s-200px.svg" alt="" width={200} height={200} />
+    <article className="home-page page">
+      <div className="hero">
+        <div className="hero-container">
+          <div className="hero_text">
+            <AnimateText
+              {...{
+                textStr: hi,
+                index: 0,
+                bold: "bold",
+              }}
+            />
+            <AnimateText
+              {...{
+                textStr: name,
+                index: 3,
+                bold: "bold",
+              }}
+            />
+            <AnimateText
+              {...{
+                textStr: profession,
+                index: name.length,
+                bold: "bold",
+              }}
+            />
+            <AnimateText
+              {...{
+                textStr: roles,
+                index: profession.length + name.length,
+                bold: "small",
+                onAnimationEnd: handleAnimation,
+              }}
+            />
           </div>
-        )}
-
-        <div className='hero_title__buttons'>
-          <Link href='/about'>
-            <button ref={aboutRef}>
-              Explore Marlon&#39;s World
-            </button>
-          </Link>
-          <Link href='/contact'>
-            <button ref={contactRef} className="contact">
-              Contact Marlon
-            </button>
-          </Link>
+          <div className="hero_contact">
+            <Link href="/contact">Contact</Link>
+          </div>
         </div>
-
       </div>
 
-      <div className="hero_image">
-        <Image
-          priority={true}
-          src='/1907.i109.039.p.m004.c30.programming development isometric icons-02 [Converted].svg'
-          alt='Illustration of software engineer'
-          width={450}
-          height={450}
-        />
-      </div>
+      <svg
+        id="front"
+        width="400"
+        height="400"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text x="50%" y="50%" fontSize="420" textAnchor="middle" dy=".3em">
+          M
+        </text>
+      </svg>
+      <svg
+        id="back"
+        width="400"
+        height="400"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text x="50%" y="50%" fontSize="420" textAnchor="middle" dy=".3em">
+          M
+        </text>
+      </svg>
     </article>
   );
-};
+}
