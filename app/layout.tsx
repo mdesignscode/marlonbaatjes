@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./styles/main.css";
+import "./styles/globals.css";
 import { cn } from "@/utils/cn";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(openSans.className, "h-screen overflow-y-hidden text-light bg-secondary")}
-      >
-        <div className="h-full overflow-y-auto">{children}</div>
+        className={cn(
+          openSans.className,
+          "h-screen overflow-y-hidden text-light bg-dark"
+        )}
+      >{children}
       </body>
     </html>
   );
