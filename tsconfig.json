@@ -22,6 +22,12 @@
       "@/components/*": ["./app/components/*"],
       "@/hooks/*": [
         "./app/hooks/*"
+      ],
+      "@/icons/*": [
+        "./app/components/icons/*"
+      ],
+      "@/ui/*": [
+        "./app/components/ui/*"
       ]
     }
   },

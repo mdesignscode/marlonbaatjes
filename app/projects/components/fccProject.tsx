@@ -1,19 +1,20 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { buttonVariants } from "@/app/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/app/components/ui/card";
-import Image from "next/image";
-import { Button, buttonVariants } from "@/app/components/ui/button";
-import { ExternalLinkIcon } from "lucide-react";
-import Link from "next/link";
+import useIsMobile from "@/app/hooks/isMobile";
 import { cn } from "@/utils/cn";
+import { motion, useInView } from "framer-motion";
+import { ExternalLinkIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 interface IFCCProjectProps {
   project: {
@@ -22,22 +23,50 @@ interface IFCCProjectProps {
     title: string;
     preview: string;
   };
+  index: number;
 }
 
-export default function FCCProject({ project }: IFCCProjectProps) {
+export default function FCCProject({ project, index }: IFCCProjectProps) {
+  const isMobile = useIsMobile(),
+    mobileStyles = {
+      initial: {
+        x: -100,
+        opacity: 0,
+      },
+      animate: {
+        x: 0,
+        opacity: 1,
+      },
+    },
+    desktopStyles = {
+      initial: {
+        y: 100,
+        opacity: 0,
+      },
+      animate: {
+        y: 0,
+        opacity: 1,
+      },
+    };
+
   return (
     <motion.div
       className="md:flex-none md:w-60"
-      initial={{ x: -100 }}
-      whileInView={{ x: 0 }}
-      transition={{ type: "spring", stiffness: 50 }}
+      initial={isMobile ? mobileStyles.initial : desktopStyles.initial}
+      whileInView={isMobile ? mobileStyles.animate : desktopStyles.animate}
+      viewport={{ once: !isMobile }}
+      transition={{
+        type: "spring",
+        stiffness: 50,
+        delay: isMobile ? 0 : index * 0.15,
+      }}
     >
       <Card className="md:h-full flex flex-col">
         <CardHeader>
           <CardTitle>{project.title}</CardTitle>
         </CardHeader>
 
-        <CardContent className="my-auto">
+        <CardContent className="mt-auto">
           <Image
             src={project.preview}
             width={400}

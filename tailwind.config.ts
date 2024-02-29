@@ -13,21 +13,20 @@ const config: Config = {
       colors: {
         light: "#fcfffc",
         dark: "#040f0f",
-        primary: "#ff36ab",
+        primary: "#e58237",
         secondary: "#2d3a3a",
-        accent: "#fffd82"
+        accent: "#b33f62"
       }
     },
   },
   plugins: [
-    plugin(function ({ addBase, theme }) {
+    plugin(function ({ addBase, theme, addComponents }) {
       addBase({
         ":root": {
           "--primary": theme("colors")?.primary,
           "--secondary": theme("colors")?.secondary
         }
       })
-      // Add your custom styles here
     })
   ],
 };
