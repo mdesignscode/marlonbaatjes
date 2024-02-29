@@ -1,10 +1,14 @@
+"use client";
+
 import Tooltip from "@/ui/tooltip";
+import { motion } from "framer-motion";
+import { childrenVariants, parentVariants } from ".";
 import AirBnBClone from "./airbnbClone";
 
 export default function FullStackProjects() {
   return (
-    <article className="space-y-3">
-      <p>
+    <motion.article variants={parentVariants} className="space-y-3">
+      <motion.p variants={childrenVariants}>
         But those are not very impressive, just simple projects, I&apos;m a{" "}
         <Tooltip
           trigger="Full Stack developer"
@@ -12,9 +16,11 @@ export default function FullStackProjects() {
           className="underline underline-offset-2"
         />
         , so let&apos;s look at some full stack projects.
-      </p>
+      </motion.p>
 
-      <AirBnBClone />
-    </article>
+      <motion.div variants={childrenVariants}>
+        <AirBnBClone />
+      </motion.div>
+    </motion.article>
   );
 }

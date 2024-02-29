@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useIsMobile from "@/app/hooks/isMobile";
 import FCCProject from "./fccProject";
+import { childrenVariants, parentVariants } from ".";
 
 export default function FCCProjects() {
   const codepenPreviewBase = "https://cdpn.io/Marlon-B/fullpage/",
@@ -51,19 +52,15 @@ export default function FCCProjects() {
       },
     ],
     isMobile = useIsMobile(),
-    [showProjects, setShowProjects] = useState(false)
+    [showProjects, setShowProjects] = useState(false);
 
   useEffect(() => {
     setShowProjects(!isMobile);
   }, [isMobile]);
 
   return (
-    <motion.article
-      className="space-y-3"
-      animate={{ y: [50, 0], opacity: [0, 1] }}
-      transition={{ duration: 1, delayChildren: 1.2 }}
-    >
-      <motion.p>
+    <motion.article className="space-y-3" variants={parentVariants}>
+      <motion.p variants={childrenVariants}>
         Let&apos;s start with projects I completed through{" "}
         <Link
           className="inline-flex gap-1 items-center underline underline-offset-2"
@@ -87,15 +84,11 @@ export default function FCCProjects() {
       </Button>
 
       {showProjects && (
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          className="p-2 flex flex-col md:flex-row gap-2 md:gap-6 width:full overflow-x-auto overflow-y-hidden"
-        >
+        <motion.div whileInView="show" variants={parentVariants} initial="hide" className="p-2 flex flex-col md:flex-row gap-2 md:gap-6 width:full overflow-x-auto overflow-y-hidden">
           {projects.map((project, i) => (
             <FCCProject index={i} project={project} key={project.title} />
           ))}
-        </motion.section>
+        </motion.div>
       )}
     </motion.article>
   );
