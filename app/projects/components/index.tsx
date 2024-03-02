@@ -1,41 +1,95 @@
 "use client";
 
-import FullStackProjects from "./fullStackProjects";
 import { motion } from "framer-motion";
-import FCCProjects from "./fccProjects";
+import Background from "@/app/components/background";
+import ProjectCard, { IProjectCardProps } from "./projectCard";
+import { useState } from "react";
 
-export const parentVariants = {
+const containerVariants = {
     show: {
-      opacity: 1,
+      rotateY: ["600deg", "0deg"],
       transition: {
-        staggerChildren: 0.6,
+        staggerChildren: 0.4,
+        duration: 1,
+        type: "spring",
+        stifness: 100,
+      },
+    },
+    hide: {},
+  },
+  visibilityVariants = {
+    show: {
+      opacity: [0, 1],
+      margin: 0,
+      transition: {
+        duration: 1,
+        staggerChildren: 0.3,
+      },
+    },
+  },
+  textVariants = {
+    show: {
+      opacty: [0, 1],
+      y: [50, 0],
+      transition: {
         duration: 1,
       },
     },
-    hide: {
-      opacity: 0,
-    },
   },
-  childrenVariants = {
-    show: { opacity: 1, y: 0, transition: { duration: 1 } },
-    hide: { opacity: 0, y: 50 },
-  };
+  personalProjects: Omit<
+    IProjectCardProps,
+    "index" | "setFirstProjectInView" | "firstProjectInView"
+  >[] = [
+    {
+      live: "https://triviamania.vercel.app",
+      source: "https://github.com/mdesignscode/trivia_mania",
+      preview: "/images/projects/triviamania/Trivia Mania.png",
+      title: "Trivia Mania",
+    },
+    {
+      live: "https://mdesigns-estore.vercel.app/",
+      source: "https://github.com/mdesignscode/ecommerce-store",
+      preview: "/images/projects/estore/E-Commerce Store.png",
+      title: "E-commerce store",
+    },
+    {
+      live: "https://random-stuff-one.vercel.app/",
+      source: "https://github.com/mdesignscode/passthetime/",
+      preview: "/images/projects/randomstuff/Pass The Time.png",
+      title: "Random Stuff",
+    },
+  ];
 
 export default function Projects() {
+  const [firstProjectInView, setFirstProjectInView] = useState(false),
+    [projectsInView, setProjectsInView] = useState(
+      personalProjects.map(() => 1)
+    );
+
   return (
-    <motion.div
-      variants={parentVariants}
-      initial="hide"
-      animate="show"
-      className="space-y-4"
-    >
-      <h1 className="font-bold text-2xl md:text-4xl">My Projects</h1>
+    <div className="space-y-4">
+      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl pb-2 border-b-2 border-neutral-200">
+        My Projects
+      </h1>
 
-      <div className="space-y-6">
-        <FCCProjects />
+      <section className="space-y-4">
+        <strong className="text-xl md:text-2xl">Personal projects</strong>
 
-        <FullStackProjects />
-      </div>
-    </motion.div>
+        <div>
+          <div className="flex flex-col items-center gap-8 md:gap-7 md:flex-wrap md:flex-row md:justify-center">
+            {personalProjects.map(({ title, source, preview, live }, i) => (
+              <ProjectCard
+                index={i}
+                key={title}
+                preview={preview}
+                live={live}
+                title={title}
+                source=""
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

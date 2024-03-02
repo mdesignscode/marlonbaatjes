@@ -14,9 +14,12 @@ const config: Config = {
         light: "#fcfffc",
         dark: "#040f0f",
         primary: "#e58237",
-        secondary: "#2d3a3a",
+        secondary: "#2d2e2e",
         accent: "#b33f62"
-      }
+      },
+      boxShadow: {
+        card: '10px 10px 0px 0px',
+      },
     },
   },
   plugins: [

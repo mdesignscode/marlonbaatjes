@@ -4,14 +4,8 @@ const Projects = dynamic(() => import("./components"), { ssr: false });
 
 export default function Page() {
   return (
-    <>
-      <div className="absolute h-screen w-screen z-0 top-0 left-0">
-        <div className="bg-image blur-[8px]" />
-        <div className="overlay opacity-70" />
-      </div>
-      <main className="px-6 py-4 md:text-lg main">
-        <Projects />
-      </main>
-    </>
+    <main className="md:text-lg h-full overflow-y-auto px-10 sm:px-24 md:px-16 py-6 sm:py-10 md:py-14">
+      <Projects />
+    </main>
   );
 }

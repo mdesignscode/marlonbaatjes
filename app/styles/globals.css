@@ -3,7 +3,7 @@
 }
 
 .bg-image {
-  @apply absolute h-screen w-screen;
+  @apply absolute h-full w-full;
   background: url('/images/web development banner.jpg') no-repeat center;
   background-size: cover;
 }

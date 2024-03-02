@@ -21,9 +21,10 @@ export default function RootLayout({
       <body
         className={cn(
           openSans.className,
-          "h-screen overflow-y-hidden text-light bg-dark"
+          "text-neutral-200 bg-secondary h-screen overflow-y-hidden"
         )}
-      >{children}
+      >
+        {children}
       </body>
     </html>
   );
