@@ -19,6 +19,7 @@ const config: Config = {
       },
       boxShadow: {
         card: '10px 10px 0px 0px',
+        inner: "0 0 25px rgba(0,0,0,.75) inset"
       },
     },
   },
