@@ -1,16 +1,46 @@
 ---
-
+import RootLayout from "../layouts/RootLayout.astro";
+import GithubIcon from "../components/icons/GithubIcon.astro";
+import PrimaryLink from "../components/PrimaryLink.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<RootLayout title="Home">
+  <div
+    class="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative"
+  >
+    <div
+      class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg"
+    >
+      <img
+        src="/images/marlon.png"
+        alt="Image of Marlon"
+        class="w-full h-full rounded-full border-2 border-secondary ring-2 ring-primary"
+      />
+    </div>
+
+    <div class="text-center lg:text-start space-y-4">
+      <div class="space-y-2">
+        <strong class="text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+          >Hi there, I'm Marlon Baatjes</strong
+        >
+        <p>I love creating feature packed applications for the web</p>
+      </div>
+
+      <div class="flex justify-between items-center text-sm gap-4">
+        <PrimaryLink href="/projects" styles="btn-primary">
+          My project
+        </PrimaryLink>
+
+        <PrimaryLink
+          shadow="hidden md:block"
+          styles="hover:text-neutral-600 text-neutral-500 md:text-inherit md:btn-primary"
+          href="https://github.com/mdesignscode"
+        >
+          <GithubIcon />
+
+          <p class="hidden md:block">My github profile</p>
+        </PrimaryLink>
+      </div>
+    </div>
+  </div>
+</RootLayout>

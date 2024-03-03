@@ -1,0 +1,24 @@
+---
+const { styles, shadow, href } = Astro.props;
+---
+
+<style>
+  @tailwind components;
+
+  @layer components {
+    .btn-primary {
+      @apply relative bg-neutral-600 py-2 px-4 md:text-lg lg:text-2xl hover:text-neutral-200 transition-all;
+    }
+  }
+</style>
+
+<a href={href} class="group relative">
+  <span
+    class=`absolute w-full h-full bg bg-neutral-800 -right-2 -bottom-2 -z-10 group-hover:translate-y-1 group-hover:translate-x-1 transition-all ${shadow}`
+  ></span>
+  <div
+    class={`group-hover:-translate-y-1 group-hover:-translate-x-1 ${styles}`}
+  >
+    <slot />
+  </div>
+</a>
