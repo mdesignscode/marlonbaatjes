@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "verbatimModuleSyntax": true,
-    "baseUrl": "/home/marlon/programming/websites/marlonbaatjes",
+    "baseUrl": ".",
     "paths": {
       "@components/*": [
         "src/components/*"
