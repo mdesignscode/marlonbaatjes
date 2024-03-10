@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  key: "personal" | "clones";
+  projects: (typeof allProjects)[typeof key];
+}
+
+import allProjects from "@src/allProjects";
+import ProjectCard from "./ProjectCard.astro";
+const { title, projects, key } = Astro.props;
+---
+
+<section class="space-y-4">
+  <strong class="text-xl md:text-2xl">{title}</strong>
+
+  <div
+    class="flex flex-col items-center gap-8 md:gap-7 md:flex-wrap md:flex-row md:justify-center"
+  >
+    {
+      Object.keys(projects).map((projectKey) => {
+        const project = projects[projectKey];
+        return (
+          <ProjectCard
+            projectType={key}
+            key={projectKey}
+            preview={project.preview}
+            title={title}
+          />
+        );
+      })
+    }
+  </div>
+</section>

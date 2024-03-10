@@ -1,3 +1,26 @@
 {
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "baseUrl": "/home/marlon/programming/websites/marlonbaatjes",
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@src/*": [
+        "src/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@icons/*": [
+        "src/components/icons/*"
+      ]
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  },
   "extends": "astro/tsconfigs/strict"
 }

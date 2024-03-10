@@ -1,0 +1,31 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  key: string;
+  preview: string;
+  title: string;
+  projectType: string;
+}
+const { preview, title, key, projectType } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/**"
+);
+---
+
+<a
+  href=`/projects/${projectType}/${key}`
+  class="flex-none w-full md:w-[40%] lg:w-[33%] bg-neutral-200 group text-dark relative text-center shadow-card shadow-neutral-800"
+>
+  <p class="uppercase tracking-widest text-gray-500">{title}</p>
+
+  <div class="relative">
+    <Image src={images[preview]()} alt=`${title} preview` />
+    <div
+      aria-hidden="true"
+      class="w-full h-full shadow-inner absolute top-0 left-0"
+    >
+    </div>
+  </div>
+</a>
