@@ -8,22 +8,15 @@ import GithubIcon from "@components/icons/GithubIcon.astro";
 
 export async function getStaticPaths() {
   const personalProjectsKeys = [
-      "airbnb-clone",
-      "amazon-clone",
-      "game-info-page",
       "triviamania",
       "estore",
       "randomstuff",
       "spots",
     ],
     cloneProjectsKeys = [
-      "airbnb-clone",
-      "amazon-clone",
-      "game-info-page",
-      "triviamania",
-      "estore",
-      "randomstuff",
-      "spots",
+      "airbnb",
+      "amazon",
+      "game-info",
     ],
     personalParams = personalProjectsKeys.map((title) => ({
       params: {

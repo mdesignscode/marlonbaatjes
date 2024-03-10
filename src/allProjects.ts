@@ -91,7 +91,7 @@ const allProjects: IAllProjects = {
     },
   },
   clones: {
-    "airbnb-clone": {
+    airbnb: {
       live: "https://airbnb-clone-js-beta.vercel.app/hbnb",
       source: "https://github.com/mdesignscode/airbnb-clone-js/",
       preview:
@@ -109,7 +109,7 @@ const allProjects: IAllProjects = {
         "Chai.js"
       ]
     },
-    "amazon-clone": {
+    amazon: {
       live: "https://challenge-1dc17.web.app/",
       preview: "/src/assets/projects/clones/amazon/Amazon Clone.png",
       title: "Amazon Clone",
@@ -120,7 +120,7 @@ const allProjects: IAllProjects = {
         "Sass"
       ]
     },
-    "game-info-page": {
+    "game-info": {
       live: "https://game-info-page.onrender.com/",
       source: "https://github.com/mdesignscode/game-info-page",
       preview: "/src/assets/projects/clones/game-info/Stardew Valley Info.png",
