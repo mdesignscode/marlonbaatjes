@@ -7,11 +7,11 @@ import { Image } from "astro:assets";
 ---
 
 <RootLayout title="Home">
-  <div
+  <main data-barba="container" data-barba-namespace="home"
     class="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative"
   >
     <div
-      class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg"
+      class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg animation-item" data-animations=""
     >
       <Image
         src={Marlon}
@@ -46,5 +46,5 @@ import { Image } from "astro:assets";
         </PrimaryLink>
       </div>
     </div>
-  </div>
+  </main>
 </RootLayout>

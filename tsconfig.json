@@ -17,6 +17,9 @@
       ],
       "@icons/*": [
         "src/components/icons/*"
+      ],
+      "@styles/*": [
+        "src/components/styles/*"
       ]
     },
     "jsx": "preserve",

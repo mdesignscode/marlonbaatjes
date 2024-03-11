@@ -14,6 +14,9 @@ export default {
 				"card-sm": '5px 5px 0px 0px #262626',
 				card: '10px 10px 0px 0px #262626',
 				inner: "0 0 25px rgba(0,0,0,.75) inset"
+			},
+			fontFamily: {
+				'display': ['Oswald'],
 			}
 		},
 	},

@@ -1,0 +1,46 @@
+:root {
+  --spring-easing: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017,
+      1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%,
+      1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%,
+      0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1);
+  --spring-duration: 1.333s;
+}
+
+nav {
+  transition-timing-function: var(--spring-easing);
+  transition-duration: var(--spring-duration)
+}
+
+.nav-item {
+  @apply px-4 py-2 relative overflow-hidden font-extrabold uppercase;
+}
+
+.nav-item::before,
+.nav-item::after {
+  @apply w-full h-1/2 absolute -z-10;
+  content: "";
+  transition-timing-function: linear(0, 0.007, 0.029 2.2%, 0.118, 0.234 7.1%, 0.625 14.4%, 0.735, 0.826, 0.902,
+      0.962, 1.008 26.1%, 1.041 28.7%, 1.055 30.3%, 1.064, 1.069, 1.07 36%,
+      1.061 40.5%, 1.015 53.4%, 1.006 57.4%, 0.999 61.6%, 0.995 71.2%, 1);
+  transition-duration: 1.2s;
+}
+
+.nav-item::before {
+  @apply bg-emerald-600 top-0 -left-[100%];
+}
+
+.nav-item::before:hover {
+  @apply left-0;
+}
+
+.nav-item::after {
+  @apply bg-emerald-700 -right-[100%] bottom-0;
+}
+
+.nav-item::after:hover {
+  @apply right-0;
+}
+
+main {
+  @apply h-full overflow-y-auto;
+}
