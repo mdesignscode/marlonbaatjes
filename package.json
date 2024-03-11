@@ -11,11 +11,15 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.6",
+    "@astrojs/partytown": "^2.0.4",
+    "@astrojs/sitemap": "^3.1.1",
+    "@astrojs/solid-js": "^4.0.1",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.4.9",
     "detect-libc": "^2.0.2",
     "semver": "^7.6.0",
     "sharp": "^0.33.2",
+    "solid-js": "^1.8.15",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }

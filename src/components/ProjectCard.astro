@@ -18,7 +18,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   href=`/projects/${projectType}/${key}`
   class="flex-none w-full md:w-[40%] lg:w-[33%] bg-neutral-200 group text-dark relative text-center shadow-card shadow-neutral-800"
 >
-  <p class="uppercase tracking-widest text-gray-500">{title}</p>
+  <p class="uppercase tracking-widest text-gray-600 font-semibold">{title}</p>
 
   <div class="relative">
     <Image src={images[preview]()} alt=`${title} preview` />

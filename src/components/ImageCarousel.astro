@@ -21,7 +21,7 @@ const { images: matterImages } = Astro.props,
   }
 
   .inactive-crumb {
-    @apply w-[10px] h-[10px] opacity-50;
+    @apply w-3 h-3 opacity-50;
   }
 
   .arrow-left {
@@ -58,9 +58,9 @@ const { images: matterImages } = Astro.props,
     </div>
 
     <nav aria-label="Image Carousel Indicators" class="flex justify-center w-full">
-      <ul class="flex w-max overflow-x-auto gap-3 py-4 px-1 items-center">
+      <ul class="flex w-max overflow-x-auto gap-4 py-4 px-1 items-center">
         {images.map((_, i) => (
-          <li>
+          <li class="grid">
             <button
               id={`image-${i}`}
               class={`${!i ? "active-crumb" : "inactive-crumb"} bg-gray-300 rounded-full flex-none`}
@@ -74,7 +74,7 @@ const { images: matterImages } = Astro.props,
   </section>
 </image-carousel>
 
-<script>
+<script type="text/partytown">
   class ImageCarousel extends HTMLElement {
     constructor() {
       super();
@@ -86,7 +86,7 @@ const { images: matterImages } = Astro.props,
         previousButton = this.querySelector("#previous-image"),
         indicators = Array.from(this.querySelectorAll("[data-index]"))
 
-      const updateIndicators = (newIndex: number, updateImage?: boolean) => {
+      const updateIndicators = (newIndex, updateImage) => {
         const newIndicator = this.querySelector(`#image-${newIndex}`),
           currentIndicator = this.querySelector(`#image-${index}`)
 
