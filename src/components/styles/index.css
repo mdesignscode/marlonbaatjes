@@ -44,3 +44,7 @@ nav {
 main {
   @apply h-full overflow-y-auto;
 }
+
+.shadow-drop {
+  filter: drop-shadow(-2px 1px 4px #000);
+}
