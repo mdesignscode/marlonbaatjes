@@ -45,36 +45,58 @@ const { images: matterImages } = Astro.props,
 
 <image-carousel data-images={images.map((image) => image)}>
   <section class="mt-8" aria-label="Image carousel">
-    <div aria-label="Preview images for project" class="relative group lg:flex lg:items-center lg:justify-around" id="carousel">
-      <button id="previous-image" class="h-full absolute lg:relative left-0" aria-label="Previous Image">
+    <div
+      aria-label="Preview images for project"
+      class="relative group lg:flex lg:items-center lg:justify-around"
+      id="carousel"
+    >
+      <button
+        id="previous-image"
+        class="h-full absolute lg:relative left-0"
+        aria-label="Previous Image"
+      >
         <span class="arrow-left"></span>
         <ArrowIcon direction="-rotate-90" />
       </button>
-      <Image class="lg:w-[78%]" id="thumbnail" src={matterImages[0]()} alt="Project preview 1" />
-      <button class="h-full absolute lg:relative right-0 top-0" id="next-image" aria-label="Next Image">
+      <Image
+        class="lg:w-[78%]"
+        id="thumbnail"
+        src={matterImages[0]()}
+        alt="Project preview 1"
+      />
+      <button
+        class="h-full absolute lg:relative right-0 top-0"
+        id="next-image"
+        aria-label="Next Image"
+      >
         <span class="arrow-right"></span>
         <ArrowIcon direction="rotate-90" />
       </button>
     </div>
 
-    <nav aria-label="Image Carousel Indicators" class="flex justify-center w-full">
+    <nav
+      aria-label="Image Carousel Indicators"
+      class="flex justify-center w-full"
+    >
       <ul class="flex w-max overflow-x-auto gap-4 py-4 px-1 items-center">
-        {images.map((_, i) => (
-          <li class="grid">
-            <button
-              id={`image-${i}`}
-              class={`${!i ? "active-crumb" : "inactive-crumb"} bg-gray-300 rounded-full flex-none`}
-              data-index={i}
-              aria-label={`Image ${i + 1}`}
-            ></button>
-          </li>
-        ))}
+        {
+          images.map((_, i) => (
+            <li class="grid">
+              <button
+                id={`image-${i}`}
+                class={`${!i ? "active-crumb" : "inactive-crumb"} bg-gray-300 rounded-full flex-none`}
+                data-index={i}
+                aria-label={`Image ${i + 1}`}
+              />
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </section>
 </image-carousel>
 
-<script type="text/partytown">
+<script>
   class ImageCarousel extends HTMLElement {
     constructor() {
       super();
@@ -84,23 +106,23 @@ const { images: matterImages } = Astro.props,
         thumbnail = this.querySelector("#thumbnail"),
         images = (this.dataset.images || "[]").split(","),
         previousButton = this.querySelector("#previous-image"),
-        indicators = Array.from(this.querySelectorAll("[data-index]"))
+        indicators = Array.from(this.querySelectorAll("[data-index]"));
 
-      const updateIndicators = (newIndex, updateImage) => {
+      const updateIndicators = (newIndex: number, updateImage?: boolean) => {
         const newIndicator = this.querySelector(`#image-${newIndex}`),
-          currentIndicator = this.querySelector(`#image-${index}`)
+          currentIndicator = this.querySelector(`#image-${index}`);
 
         if (updateImage) thumbnail?.setAttribute("src", images[newIndex]);
 
-        currentIndicator?.classList.toggle("active-crumb")
-        currentIndicator?.classList.add("inactive-crumb")
+        currentIndicator?.classList.toggle("active-crumb");
+        currentIndicator?.classList.add("inactive-crumb");
 
-        newIndicator?.classList.toggle("inactive-crumb")
-        newIndicator?.classList.add("active-crumb")
-      }
+        newIndicator?.classList.toggle("inactive-crumb");
+        newIndicator?.classList.add("active-crumb");
+      };
 
       nextButton?.addEventListener("click", () => {
-        const newIndex = index === images.length - 1 ? 0 : index + 1
+        const newIndex = index === images.length - 1 ? 0 : index + 1;
         updateIndicators(newIndex);
 
         index = newIndex;
@@ -118,7 +140,7 @@ const { images: matterImages } = Astro.props,
       });
 
       indicators.forEach((indicator, i) => {
-        indicator.addEventListener("click", () => updateIndicators(i, true))
+        indicator.addEventListener("click", () => updateIndicators(i, true));
       });
     }
   }

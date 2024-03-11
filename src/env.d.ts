@@ -9,5 +9,6 @@ type TProjectInfo = {
   description: string
   techStack: string[],
   features?: string[],
-  technicalDetails?: string[]
+  technicalDetails?: string[],
+  isFeatured?: boolean;
 }

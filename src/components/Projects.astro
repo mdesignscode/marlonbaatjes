@@ -25,6 +25,8 @@ const { title, projects, key } = Astro.props;
             key={projectKey}
             preview={project.preview}
             title={project.title}
+            isFeatured={project.isFeatured}
+            summary={project.summary}
           />
         );
       })

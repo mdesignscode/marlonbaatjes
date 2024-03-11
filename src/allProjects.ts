@@ -7,6 +7,7 @@ interface IAllProjects {
 const allProjects: IAllProjects = {
   personal: {
     spots: {
+      isFeatured: true,
       source: "https://github.com/mdesignscode/spots_flask",
       preview: "/src/assets/projects/personal/spots/Spots.png",
       title: "Spots",
@@ -50,6 +51,7 @@ const allProjects: IAllProjects = {
       ]
     },
     triviamania: {
+      isFeatured: true,
       live: "https://triviamania.vercel.app",
       source: "https://github.com/mdesignscode/trivia_mania",
       preview: "/src/assets/projects/personal/triviamania/Trivia Mania.png",
@@ -77,7 +79,7 @@ const allProjects: IAllProjects = {
       source: "https://github.com/mdesignscode/ecommerce-store",
       preview: "/src/assets/projects/personal/estore/E-Commerce Store.png",
       title: "E-commerce store",
-      summary: "My implementation of am E-commerce app",
+      summary: "My implementation of an E-commerce app",
       description: "This is a web app implementing features such Product listing, shopping cart, wish list, user authentication, a dashboard for managing products in storage, secure checkout payment using Stripe.js, user purchase history, tooltips, and attention-to-detail loading skeletons",
       techStack: [
         "Typescript",

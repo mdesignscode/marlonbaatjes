@@ -13,11 +13,7 @@ export async function getStaticPaths() {
       "randomstuff",
       "spots",
     ],
-    cloneProjectsKeys = [
-      "airbnb",
-      "amazon",
-      "game-info",
-    ],
+    cloneProjectsKeys = ["airbnb", "amazon", "game-info"],
     personalParams = personalProjectsKeys.map((title) => ({
       params: {
         title,
@@ -84,15 +80,33 @@ const { title, query } = Astro.params,
     <ImageCarousel images={titleImages} />
 
     <section>
-      <h2 class="font-bold text-lg md:text-xl lg:text-2xl">About this project</h2>
+      <h2 class="font-bold text-lg md:text-xl lg:text-2xl">
+        About this project
+      </h2>
 
       <section class="space-y-1 md:text-lg lg:text-xl">
         {projectInfo.description.split("\n").map((text) => <p>{text}</p>)}
       </section>
     </section>
 
+    {
+      projectInfo.features && (
+        <section>
+          <h2 class="font-bold text-lg md:text-xl lg:text-2xl">Features</h2>
+
+          <ul class="md:text-lg lg:text-xl">
+            {projectInfo.features.map((text) => (
+              <li class="list-disc ml-4">{text}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
     <section>
-      <h2 class="font-bold text-lg md:text-xl lg:text-2xl">This project was built using</h2>
+      <h2 class="font-bold text-lg md:text-xl lg:text-2xl">
+        This project was built using
+      </h2>
 
       <ul class="md:text-lg lg:text-xl">
         {
@@ -106,7 +120,9 @@ const { title, query } = Astro.params,
     {
       projectInfo.technicalDetails && (
         <section>
-          <h2 class="font-bold text-lg md:text-xl lg:text-2xl">Technical details</h2>
+          <h2 class="font-bold text-lg md:text-xl lg:text-2xl">
+            Technical details
+          </h2>
 
           <ul class="space-y-2 md:text-lg lg:text-xl">
             {projectInfo.technicalDetails.map((detail) =>
