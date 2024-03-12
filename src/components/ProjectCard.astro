@@ -17,6 +17,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 ---
 
+<style>
+  a {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+</style>
+
 <a
   href=`/projects/${projectType}/${key}`
   class="flex-none w-full md:w-[40%] lg:w-[33%] bg-neutral-200 group text-dark relative text-center shadow-card shadow-neutral-800 group"

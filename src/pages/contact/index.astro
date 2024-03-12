@@ -1,0 +1,208 @@
+---
+import RootLayout from "@layouts/RootLayout.astro";
+import CodePenIcon from "@icons/CodePenIcon.astro";
+import LinkedInIcon from "@icons/LinkedInIcon.astro";
+import WhatsAppIcon from "@icons/WhatsAppIcon.astro";
+---
+
+<style>
+  main {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+
+  h1 {
+    animation: pulse 1s forwards;
+  }
+
+  a:first-of-type() {
+    opacity: 0;
+    animation:
+      pulse 1s 0.6s,
+      fadeIn 1s 0.6s forwards;
+  }
+
+  a:nth-of-type(2) {
+    opacity: 0;
+    animation:
+      pulse 1s 0.9s,
+      fadeIn 1s 0.9s forwards;
+  }
+
+  a:nth-of-type(3) {
+    opacity: 0;
+    animation:
+      pulse 1s 1.2s,
+      fadeIn 1s 1.2s forwards;
+  }
+
+  .form {
+    opacity: 0;
+    animation:
+      pulse 1s 1s,
+      fadeIn 1s 1s forwards;
+  }
+</style>
+
+<RootLayout title="Contact Me">
+  <main
+    class="flex flex-col gap-4 px-10 sm:px-24 md:px-16 py-6 sm:py-10 md:py-14"
+  >
+    <h1
+      class="font-bold text-xl md:text-2xl lg:text-3xl pb-2 border-b-2 border-neutral-200"
+    >
+      Let's get in touch
+    </h1>
+
+    <div class="flex flex-col items-start lg:flex-row gap-4">
+      <section class="flex flex-col items-start gap-2 md:gap-4">
+        <a
+          class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
+          href="https://www.linkedin.com/in/marlonbaatjes"
+          target="_blank"
+          aria-label="Visit Marlon's LinkedIn Profile"
+        >
+          <LinkedInIcon />
+          Marlon Baatjes
+        </a>
+
+        <a
+          class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
+          href="https://wa.me/+27790226755"
+          target="_blank"
+          aria-label="Chat on WhatsApp"
+        >
+          <WhatsAppIcon />
+          +27 79 022 6755
+        </a>
+
+        <a
+          class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
+          href="https://codepen.io/Marlon-B"
+          target="_blank"
+          aria-label="View Marlon's CodePen's"
+        >
+          <CodePenIcon />
+          Marlon-B
+        </a>
+      </section>
+
+      <div class="flex-1 form">
+        <section
+          class="max-w-md lg:mx-auto bg-neutral-600 p-8 rounded-md shadow-md"
+        >
+          <h2 class="text-2xl font-semibold mb-4">Email Me</h2>
+          <form id="contactForm" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="name"
+                  class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
+                  >Name</label
+                >
+                <input
+                  placeholder="Jane Doe"
+                  required
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="mt-1 p-2 w-full border rounded-md text-dark"
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
+                  >Email</label
+                >
+                <input
+                  placeholder="janedoe@example.com"
+                  required
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="mt-1 p-2 w-full border rounded-md text-dark"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="subject"
+                class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
+                >Subject</label
+              >
+              <input
+                placeholder="Let's discuss..."
+                required
+                type="text"
+                id="subject"
+                name="subject"
+                class="mt-1 p-2 w-full border rounded-md text-dark"
+              />
+            </div>
+            <div>
+              <label
+                for="message"
+                class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
+                >Message</label
+              >
+              <textarea
+                placeholder="I need X, Y, Z functionality on my website"
+                required
+                id="message"
+                name="message"
+                rows="4"
+                class="mt-1 p-2 w-full border rounded-md text-dark"></textarea>
+            </div>
+            <button
+              type="submit"
+              onclick="sendEmail()"
+              class="w-full bg-emerald-700 text-white md:xl md:text-2xl-lg lg:text-xl py-2 rounded-md hover:bg-emerald-600 transition-colors duration-500 focus:outline-none focus:ring focus:border-blue-300"
+              >Send Message</button
+            >
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</RootLayout>
+
+<script>
+  import emailjs from "@emailjs/browser";
+  emailjs.init({
+    publicKey: import.meta.env.PUBLIC_EMAILJS_PK,
+  });
+
+  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    console.log({
+      service: import.meta.env.PUBLIC_SERVICE_ID,
+      template: import.meta.env.PUBLIC_TEMPLATE_ID,
+    });
+
+    const form = document.getElementById(
+      "contactForm"
+    ) as HTMLFormElement | null;
+
+    if (!form) throw new Error("No form element found");
+
+    emailjs
+      .sendForm(
+        import.meta.env.PUBLIC_SERVICE_ID,
+        import.meta.env.PUBLIC_TEMPLATE_ID,
+        form
+      )
+      .then(
+        (response) => {
+          console.log("Email sent successfully:", response);
+          alert("Your message has been sent successfully!");
+          form.reset();
+        },
+        (error) => {
+          console.log("Failed to send email:", error);
+          alert("Oops! Something went wrong. Please try again later.");
+        }
+      );
+  });
+</script>

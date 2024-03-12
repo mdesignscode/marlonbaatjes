@@ -44,7 +44,7 @@ const { images: matterImages } = Astro.props,
 </style>
 
 <image-carousel data-images={images.map((image) => image)}>
-  <section class="mt-8" aria-label="Image carousel">
+  <section class="mt-8 carousel" aria-label="Image carousel">
     <div
       aria-label="Preview images for project"
       class="relative group lg:flex lg:items-center lg:justify-around"
@@ -59,7 +59,7 @@ const { images: matterImages } = Astro.props,
         <ArrowIcon direction="-rotate-90" />
       </button>
       <Image
-        class="lg:w-[78%]"
+        class="lg:w-[78%] rounded-sm"
         id="thumbnail"
         src={matterImages[0]()}
         alt="Project preview 1"

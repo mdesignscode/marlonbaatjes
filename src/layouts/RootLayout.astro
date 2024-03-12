@@ -1,5 +1,6 @@
 ---
 import Navbar from "@components/Navbar.tsx";
+import "animate.css";
 const { title } = Astro.props;
 ---
 
@@ -23,7 +24,6 @@ const { title } = Astro.props;
   </head>
   <body
     class="bg-secondary text-neutral-200 h-[100dvh] overflow-y-hidden"
-    data-barba="wrapper"
   >
     <Navbar client:only />
     <slot />

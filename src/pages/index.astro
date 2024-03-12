@@ -6,12 +6,33 @@ import Marlon from "@assets/marlon.png";
 import { Image } from "astro:assets";
 ---
 
+<style>
+  main {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+
+  .image {
+    opacity: 0;
+    animation: fadeInLeft 1.4s 1s forwards;
+  }
+
+  .text {
+    opacity: 0;
+    animation: fadeInRight 1.6s 1.2s forwards;
+  }
+
+  .links {
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+  }
+</style>
+
 <RootLayout title="Home">
-  <main data-barba="container" data-barba-namespace="home"
-    class="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative"
+  <main class="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative"
   >
     <div
-      class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg animation-item" data-animations=""
+      class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg image"
     >
       <Image
         src={Marlon}
@@ -21,21 +42,22 @@ import { Image } from "astro:assets";
     </div>
 
     <div class="text-center lg:text-start space-y-4">
-      <div class="space-y-2">
+      <div class="space-y-2 text">
         <strong class="text-xl sm:text-2xl md:text-3xl lg:text-4xl"
           >Hi there, I'm Marlon Baatjes</strong
         >
         <p>I love creating feature packed applications for the web</p>
       </div>
 
-      <div class="flex justify-between items-center text-sm gap-4">
-        <PrimaryLink href="/projects" styles="btn-primary">
+      <div class="flex justify-between items-center text-sm gap-4 links">
+        <PrimaryLink href="/projects" styles="btn-primary" animation="link-1">
           My projects
         </PrimaryLink>
 
         <PrimaryLink
           shadow="hidden md:block"
           styles="hover:text-neutral-600 text-neutral-500 md:text-inherit md:btn-primary"
+          animation="link-2"
           href="https://github.com/mdesignscode"
         >
           <span class="md:hidden" aria-label="Visit developer's github profile">
