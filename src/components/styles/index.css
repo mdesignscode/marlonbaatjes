@@ -6,7 +6,7 @@
   --spring-duration: 1.333s;
 }
 
-nav {
+nav, .label {
   transition-timing-function: var(--spring-easing);
   transition-duration: var(--spring-duration)
 }

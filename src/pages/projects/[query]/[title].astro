@@ -12,6 +12,7 @@ export async function getStaticPaths() {
       "estore",
       "randomstuff",
       "spots",
+      "portfolio"
     ],
     cloneProjectsKeys = ["airbnb", "amazon", "game-info"],
     personalParams = personalProjectsKeys.map((title) => ({
@@ -80,7 +81,7 @@ const { title, query } = Astro.params,
           {projectInfo.live && (
             <a
               aria-label={`Visit ${projectInfo.title}`}
-              class="flex gap-2 items-center md:text-lg bg-neutral-600 px-2 rounded-sm"
+              class="label flex gap-2 items-center md:text-lg bg-neutral-600 px-2 rounded-sm hover:text-emerald-400 border-transparent hover:bg-transparent border-2 hover:border-emerald-400"
               target="_blank"
               href={projectInfo.live}
             >
@@ -94,10 +95,11 @@ const { title, query } = Astro.params,
           {projectInfo.source && (
             <a
               aria-label={`View the source code for ${projectInfo.title}`}
-              class="flex gap-2 items-center md:text-lg"
+              class="flex gap-2 items-center md:text-lg hover:text-emerald-400 group relative"
               target="_blank"
               href={projectInfo.source}
             >
+              <span aria-hidden="true" class="absolute left-1/2 -translate-x-1/2 bottom-0 opacity-0 group-hover:opacity-100 group-hover:bottom-full whitespace-nowrap label">Source Code</span>
               <GithubIcon />
             </a>
           )}

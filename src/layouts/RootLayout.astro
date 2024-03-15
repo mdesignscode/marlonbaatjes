@@ -1,11 +1,19 @@
 ---
+interface Props {
+  title: string;
+  className?: string;
+}
 import Navbar from "@components/Navbar.tsx";
 import "animate.css";
-const { title } = Astro.props;
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { ViewTransitions } from "astro:transitions";
+const { title, className } = Astro.props;
 ---
 
 <html lang="en">
   <head>
+    <ViewTransitions />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
@@ -22,10 +30,13 @@ const { title } = Astro.props;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   </head>
-  <body
-    class="bg-secondary text-neutral-200 h-[100dvh] overflow-y-hidden"
-  >
+  <body class="bg-secondary text-neutral-200 h-[100dvh] overflow-y-hidden">
     <Navbar client:only />
-    <slot />
+    <main
+      class={className ||
+        "md:text-lg h-full space-y-4 overflow-y-auto px-10 sm:px-24 md:px-16 py-6 sm:py-10 md:py-14 shadow-inner "}
+    >
+      <slot />
+    </main>
   </body>
 </html>

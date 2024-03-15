@@ -91,6 +91,18 @@ const allProjects: IAllProjects = {
         "Tailwind CSS"
       ]
     },
+    portfolio: {
+      description: "My portfolio, initially written in Next.js, but re-implemented in Astro",
+      summary: "My portfolio website",
+      preview: "/src/assets/projects/personal/portfolio/Marlon Baatjes.png",
+      techStack: [
+        "Astro",
+        "Solid.js",
+        "Tailwind CSS",
+        "Typescript"
+      ],
+      title: "Portfolio"
+    }
   },
   clones: {
     airbnb: {

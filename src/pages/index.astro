@@ -28,45 +28,45 @@ import { Image } from "astro:assets";
   }
 </style>
 
-<RootLayout title="Home">
-  <main class="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative"
+<RootLayout
+  className="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative"
+  title="Home"
+>
+  <div
+    class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg image"
   >
-    <div
-      class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg image"
-    >
-      <Image
-        src={Marlon}
-        alt="Image of Marlon"
-        class="w-full h-full rounded-full border-2 border-secondary ring-2 ring-primary"
-      />
+    <Image
+      src={Marlon}
+      alt="Image of Marlon"
+      class="w-full h-full rounded-full border-2 border-secondary ring-2 ring-primary"
+    />
+  </div>
+
+  <div class="text-center lg:text-start space-y-4">
+    <div class="space-y-2 text">
+      <strong class="text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+        >Hi there, I'm Marlon Baatjes</strong
+      >
+      <p>I love creating feature packed applications for the web</p>
     </div>
 
-    <div class="text-center lg:text-start space-y-4">
-      <div class="space-y-2 text">
-        <strong class="text-xl sm:text-2xl md:text-3xl lg:text-4xl"
-          >Hi there, I'm Marlon Baatjes</strong
-        >
-        <p>I love creating feature packed applications for the web</p>
-      </div>
+    <div class="flex justify-between items-center text-sm gap-4 links">
+      <PrimaryLink href="/projects" styles="btn-primary" animation="link-1">
+        My projects
+      </PrimaryLink>
 
-      <div class="flex justify-between items-center text-sm gap-4 links">
-        <PrimaryLink href="/projects" styles="btn-primary" animation="link-1">
-          My projects
-        </PrimaryLink>
+      <PrimaryLink
+        shadow="hidden md:block"
+        styles="hover:text-neutral-600 text-neutral-500 md:text-inherit md:btn-primary"
+        animation="link-2"
+        href="https://github.com/mdesignscode"
+      >
+        <span class="md:hidden" aria-label="Visit developer's github profile">
+          <GithubIcon />
+        </span>
 
-        <PrimaryLink
-          shadow="hidden md:block"
-          styles="hover:text-neutral-600 text-neutral-500 md:text-inherit md:btn-primary"
-          animation="link-2"
-          href="https://github.com/mdesignscode"
-        >
-          <span class="md:hidden" aria-label="Visit developer's github profile">
-            <GithubIcon />
-          </span>
-
-          <p class="hidden md:block">My github profile</p>
-        </PrimaryLink>
-      </div>
+        <p class="hidden md:block">My github profile</p>
+      </PrimaryLink>
     </div>
-  </main>
+  </div>
 </RootLayout>

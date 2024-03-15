@@ -45,126 +45,122 @@ import WhatsAppIcon from "@icons/WhatsAppIcon.astro";
 </style>
 
 <RootLayout title="Contact Me">
-  <main
-    class="flex flex-col gap-4 px-10 sm:px-24 md:px-16 py-6 sm:py-10 md:py-14"
+  <h1
+    class="font-bold text-xl md:text-2xl lg:text-3xl pb-2 border-b-2 border-neutral-200"
   >
-    <h1
-      class="font-bold text-xl md:text-2xl lg:text-3xl pb-2 border-b-2 border-neutral-200"
-    >
-      Let's get in touch
-    </h1>
+    Let's get in touch
+  </h1>
 
-    <div class="flex flex-col items-start lg:flex-row gap-4">
-      <section class="flex flex-col items-start gap-2 md:gap-4">
-        <a
-          class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
-          href="https://www.linkedin.com/in/marlonbaatjes"
-          target="_blank"
-          aria-label="Visit Marlon's LinkedIn Profile"
-        >
-          <LinkedInIcon />
-          Marlon Baatjes
-        </a>
+  <div class="flex flex-col items-start lg:flex-row gap-4">
+    <section class="flex flex-col items-start gap-2 md:gap-4">
+      <a
+        class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
+        href="https://www.linkedin.com/in/marlonbaatjes"
+        target="_blank"
+        aria-label="Visit Marlon's LinkedIn Profile"
+      >
+        <LinkedInIcon />
+        Marlon Baatjes
+      </a>
 
-        <a
-          class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
-          href="https://wa.me/+27790226755"
-          target="_blank"
-          aria-label="Chat on WhatsApp"
-        >
-          <WhatsAppIcon />
-          +27 79 022 6755
-        </a>
+      <a
+        class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
+        href="https://wa.me/+27790226755"
+        target="_blank"
+        aria-label="Chat on WhatsApp"
+      >
+        <WhatsAppIcon />
+        +27 79 022 6755
+      </a>
 
-        <a
-          class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
-          href="https://codepen.io/Marlon-B"
-          target="_blank"
-          aria-label="View Marlon's CodePen's"
-        >
-          <CodePenIcon />
-          Marlon-B
-        </a>
-      </section>
+      <a
+        class="flex gap-2 items-center p-2 text-xl md:text-2xl hover:text-emerald-400 transition-colors duration-500 border-2 border-neutral-200 rounded-sm hover:border-emerald-400"
+        href="https://codepen.io/Marlon-B"
+        target="_blank"
+        aria-label="View Marlon's CodePen's"
+      >
+        <CodePenIcon />
+        Marlon-B
+      </a>
+    </section>
 
-      <div class="flex-1 form">
-        <section
-          class="max-w-md lg:mx-auto bg-neutral-600 p-8 rounded-md shadow-md"
-        >
-          <h2 class="text-2xl font-semibold mb-4">Email Me</h2>
-          <form id="contactForm" class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label
-                  for="name"
-                  class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
-                  >Name</label
-                >
-                <input
-                  placeholder="Jane Doe"
-                  required
-                  type="text"
-                  id="name"
-                  name="name"
-                  class="mt-1 p-2 w-full border rounded-md text-dark"
-                />
-              </div>
-              <div>
-                <label
-                  for="email"
-                  class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
-                  >Email</label
-                >
-                <input
-                  placeholder="janedoe@example.com"
-                  required
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="mt-1 p-2 w-full border rounded-md text-dark"
-                />
-              </div>
-            </div>
+    <div class="flex-1 form">
+      <section
+        class="max-w-md lg:mx-auto bg-neutral-600 p-8 rounded-md shadow-md"
+      >
+        <h2 class="text-2xl font-semibold mb-4">Email Me</h2>
+        <form id="contactForm" class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
             <div>
               <label
-                for="subject"
+                for="name"
                 class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
-                >Subject</label
+                >Name</label
               >
               <input
-                placeholder="Let's discuss..."
+                placeholder="Jane Doe"
                 required
                 type="text"
-                id="subject"
-                name="subject"
+                id="name"
+                name="name"
                 class="mt-1 p-2 w-full border rounded-md text-dark"
               />
             </div>
             <div>
               <label
-                for="message"
+                for="email"
                 class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
-                >Message</label
+                >Email</label
               >
-              <textarea
-                placeholder="I need X, Y, Z functionality on my website"
+              <input
+                placeholder="janedoe@example.com"
                 required
-                id="message"
-                name="message"
-                rows="4"
-                class="mt-1 p-2 w-full border rounded-md text-dark"></textarea>
+                type="email"
+                id="email"
+                name="email"
+                class="mt-1 p-2 w-full border rounded-md text-dark"
+              />
             </div>
-            <button
-              type="submit"
-              onclick="sendEmail()"
-              class="w-full bg-emerald-700 text-white md:xl md:text-2xl-lg lg:text-xl py-2 rounded-md hover:bg-emerald-600 transition-colors duration-500 focus:outline-none focus:ring focus:border-blue-300"
-              >Send Message</button
+          </div>
+          <div>
+            <label
+              for="subject"
+              class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
+              >Subject</label
             >
-          </form>
-        </section>
-      </div>
+            <input
+              placeholder="Let's discuss..."
+              required
+              type="text"
+              id="subject"
+              name="subject"
+              class="mt-1 p-2 w-full border rounded-md text-dark"
+            />
+          </div>
+          <div>
+            <label
+              for="message"
+              class="block text-sm md:text-lg lg:text-xl font-medium text-neutral-200"
+              >Message</label
+            >
+            <textarea
+              placeholder="I need X, Y, Z functionality on my website"
+              required
+              id="message"
+              name="message"
+              rows="4"
+              class="mt-1 p-2 w-full border rounded-md text-dark"></textarea>
+          </div>
+          <button
+            type="submit"
+            onclick="sendEmail()"
+            class="w-full bg-emerald-700 text-white md:xl md:text-2xl-lg lg:text-xl py-2 rounded-md hover:bg-emerald-600 transition-colors duration-500 focus:outline-none focus:ring focus:border-blue-300"
+            >Send Message</button
+          >
+        </form>
+      </section>
     </div>
-  </main>
+  </div>
 </RootLayout>
 
 <script>

@@ -33,7 +33,7 @@ export default function Navbar() {
         aria-hidden={showNavbar()}
         aria-labelledby="hamburger"
         class={`w-full absolute z-30 bg-neutral-700 ${
-          !showNavbar() ? "h-0" : "h-full"
+          !showNavbar() ? "h-0 invisible" : "h-full visible"
         }`}
       >
         <div
@@ -61,6 +61,13 @@ export default function Navbar() {
             href="/contact"
           >
             Contact me
+          </a>
+          <a
+            onClick={() => setShowNavbar(false)}
+            class="nav-item px-4 py-2 w-full"
+            href="/skills"
+          >
+            My skills
           </a>
         </div>
       </nav>
