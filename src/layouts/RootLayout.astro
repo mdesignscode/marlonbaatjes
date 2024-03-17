@@ -1,42 +1,75 @@
 ---
 interface Props {
-  title: string;
-  className?: string;
+	title: string;
+	className?: string;
 }
+import CodePenIcon from "@icons/CodePenIcon.astro";
+import LinkedInIcon from "@icons/LinkedInIcon.astro";
+import WhatsAppIcon from "@icons/WhatsAppIcon.astro";
 import Navbar from "@components/Navbar.tsx";
 import "animate.css";
-import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
 const { title, className } = Astro.props;
+import GithubIcon from "../components/icons/GithubIcon.astro";
 ---
 
 <html lang="en">
-  <head>
-    <ViewTransitions />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Full stack web developer portfolio. React.js | Next.js | Node.js | Typescript | C | Python | Front End | Back End"
-    />
-    <title>{title} | Marlon Baatjes</title>
-    <meta name="theme-color" content="#b33f62" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  </head>
-  <body class="bg-secondary text-neutral-200 h-[100dvh] overflow-y-hidden">
-    <Navbar client:only />
-    <main
-      class={className ||
-        "md:text-lg h-full space-y-4 overflow-y-auto px-10 sm:px-24 md:px-16 py-6 sm:py-10 md:py-14 shadow-inner "}
-    >
-      <slot />
-    </main>
-  </body>
+	<head>
+		<ViewTransitions />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta
+			name="description"
+			content="Full stack web developer portfolio. React.js | Next.js | Node.js | Typescript | C | Python | Front End | Back End"
+		/>
+		<title>{title} | Marlon Baatjes</title>
+		<meta name="theme-color" content="#b33f62" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	</head>
+	<body class="bg-secondary text-neutral-200 h-[100dvh] overflow-y-hidden">
+		<Navbar client:only />
+		<main
+			class={className ||
+				"md:text-lg h-full space-y-4 overflow-y-auto px-10 sm:px-24 md:px-16 py-6 sm:py-10 md:py-14"}
+		>
+			<slot />
+		</main>
+
+		<div class="absolute right-0 top-1/2 -translate-y-1/2 bg-neutral-600 flex flex-col items-center gap-1 p-2" id="social">
+			<a
+				class="hover:text-emerald-400 transition-colors"
+				aria-label="Visit developer's github profile"
+				href="https://github.com/mdesignscode"
+				target="_blank"><GithubIcon /></a
+			>
+			<a
+				class="hover:text-emerald-400 transition-colors"
+				href="https://www.linkedin.com/in/marlonbaatjes"
+				target="_blank"
+				aria-label="Visit Marlon's LinkedIn Profile"
+			>
+				<LinkedInIcon /></a
+			>
+			<a
+				class="hover:text-emerald-400 transition-colors"
+				aria-label="Chat on WhatsApp"
+				href="https://wa.me/+27790226755"
+				target="_blank"
+			>
+				<WhatsAppIcon /></a
+			>
+			<a
+				class="hover:text-emerald-400 transition-colors"
+				href="https://codepen.io/Marlon-B"
+				aria-label="View Marlon's CodePen's"
+				target="_blank"><CodePenIcon /></a
+			>
+		</div>
+	</body>
 </html>

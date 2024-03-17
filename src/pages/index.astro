@@ -1,6 +1,5 @@
 ---
 import RootLayout from "../layouts/RootLayout.astro";
-import GithubIcon from "../components/icons/GithubIcon.astro";
 import PrimaryLink from "../components/PrimaryLink.astro";
 import Marlon from "@assets/marlon.png";
 import { Image } from "astro:assets";
@@ -26,12 +25,46 @@ import { Image } from "astro:assets";
     opacity: 0;
     animation: fadeIn 1s 1s forwards;
   }
+
+  .background-1,
+  .background-2,
+  .background-3 {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+
+  .background-1 {
+    animation-delay: 2s;
+  }
+
+  .background-2 {
+    animation-delay: 1.5s;
+  }
+
+  .background-3 {
+    animation-delay: 1s;
+  }
 </style>
 
 <RootLayout
-  className="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative"
+  className="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative overflow-x-hidden"
   title="Home"
 >
+  <div
+    aria-hidden="true"
+    class="absolute bottom-14 -right-6 md:top-10 md:left-20 w-40 h-40 bg-emerald-600 rounded-full blur-2xl background-1"
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="hidden md:block absolute bottom-20 right-80 w-52 h-52 bg-emerald-600 rounded-full blur-2xl background-2"
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="absolute -top-10 -left-10 md:left-auto md:right-0 w-60 h-60 md:w-80 md:h-80 bg-emerald-600 rounded-full blur-2xl background-3"
+  >
+  </div>
   <div
     class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg image"
   >
@@ -56,16 +89,11 @@ import { Image } from "astro:assets";
       </PrimaryLink>
 
       <PrimaryLink
-        shadow="hidden md:block"
-        styles="hover:text-neutral-600 text-neutral-500 md:text-inherit md:btn-primary"
+        styles="hover:text-neutral-600 text-neutral-500 md:text-inherit btn-primary"
         animation="link-2"
-        href="https://github.com/mdesignscode"
+        href="/contact"
       >
-        <span class="md:hidden" aria-label="Visit developer's github profile">
-          <GithubIcon />
-        </span>
-
-        <p class="hidden md:block">My github profile</p>
+        <p>Contact me</p>
       </PrimaryLink>
     </div>
   </div>

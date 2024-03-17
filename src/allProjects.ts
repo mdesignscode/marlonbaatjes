@@ -36,6 +36,7 @@ const allProjects: IAllProjects = {
       ]
     },
     randomstuff: {
+      isFeatured: true,
       live: "https://random-stuff-one.vercel.app/",
       source: "https://github.com/mdesignscode/passthetime/",
       preview: "/src/assets/projects/personal/randomstuff/Pass The Time.png",
