@@ -113,9 +113,12 @@ const allProjects: IAllProjects = {
         "Headless UI",
         "React.js",
         "Tailwind CSS",
-        "Vite"
+        "Vite",
+        "Typescript"
       ],
-      title: "BMW i5 eDrive40"
+      title: "BMW i5 eDrive40",
+      live: "https://bmw-i5.vercel.app/#",
+      source: "https://github.com/mdesignscode/bmw-i5"
     }
   },
   clones: {
@@ -162,8 +165,8 @@ const allProjects: IAllProjects = {
       ]
     },
     qrates: {
-      live: "https://airbnb-clone-js-beta.vercel.app/hbnb",
-      source: "https://github.com/mdesignscode/airbnb-clone-js/",
+      live: "https://qrates-clone-mauve.vercel.app/",
+      source: "https://github.com/mdesignscode/qrates-clone",
       preview:
         "/src/assets/projects/clones/qrates/Qrates Clone For Artists.jpeg",
       title: "For Artists Page",
@@ -172,7 +175,8 @@ const allProjects: IAllProjects = {
       techStack: [
         "React.js",
         "Tailwind CSS",
-        "Vite"
+        "Vite",
+        "Typescript"
       ]
     },
   }
