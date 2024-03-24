@@ -103,6 +103,19 @@ const allProjects: IAllProjects = {
         "Typescript"
       ],
       title: "Portfolio"
+    },
+    bmwi5: {
+      description: "This project was developed to learn more about front end development and features parallex scroll.",
+      summary: "A showcase of the BMW i5",
+      preview: "/src/assets/projects/personal/bmwi5/BMW i5 eDrive-40-1.jpeg",
+      techStack: [
+        "Framer Motion",
+        "Headless UI",
+        "React.js",
+        "Tailwind CSS",
+        "Vite"
+      ],
+      title: "BMW i5 eDrive40"
     }
   },
   clones: {
@@ -146,6 +159,20 @@ const allProjects: IAllProjects = {
         "React.js",
         "Sass",
         "Vite",
+      ]
+    },
+    qrates: {
+      live: "https://airbnb-clone-js-beta.vercel.app/hbnb",
+      source: "https://github.com/mdesignscode/airbnb-clone-js/",
+      preview:
+        "/src/assets/projects/clones/qrates/Qrates Clone For Artists.jpeg",
+      title: "For Artists Page",
+      summary: "A front end clone of Qrates' For Artists page",
+      description: "Replicates: responsive design, css grid",
+      techStack: [
+        "React.js",
+        "Tailwind CSS",
+        "Vite"
       ]
     },
   }
