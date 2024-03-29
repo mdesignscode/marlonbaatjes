@@ -44,7 +44,10 @@ const { images: matterImages } = Astro.props,
 </style>
 
 <image-carousel data-images={images.map((image) => image)}>
-  <section class="mt-8 carousel" aria-label="Image carousel">
+  <section
+    class="mt-8 carousel project-details opacity-0"
+    aria-label="Image carousel"
+  >
     <div
       aria-label="Preview images for project"
       class="relative group lg:flex lg:items-center lg:justify-around"
@@ -112,7 +115,9 @@ const { images: matterImages } = Astro.props,
         const newIndicator = this.querySelector(`#image-${newIndex}`),
           currentIndicator = this.querySelector(`#image-${index}`);
 
-        if (updateImage) thumbnail?.setAttribute("src", images[newIndex]);
+        if (updateImage) {
+          thumbnail?.setAttribute("src", images[newIndex]);
+        }
 
         currentIndicator?.classList.toggle("active-crumb");
         currentIndicator?.classList.add("inactive-crumb");

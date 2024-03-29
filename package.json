@@ -16,7 +16,6 @@
     "@astrojs/solid-js": "^4.0.1",
     "@astrojs/tailwind": "^5.1.0",
     "@emailjs/browser": "^4.3.3",
-    "animate.css": "^4.1.1",
     "astro": "^4.4.9",
     "detect-libc": "^2.0.2",
     "semver": "^7.6.0",

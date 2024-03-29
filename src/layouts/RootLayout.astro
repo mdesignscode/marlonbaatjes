@@ -7,11 +7,137 @@ import CodePenIcon from "@icons/CodePenIcon.astro";
 import LinkedInIcon from "@icons/LinkedInIcon.astro";
 import WhatsAppIcon from "@icons/WhatsAppIcon.astro";
 import Navbar from "@components/Navbar.tsx";
-import "animate.css";
 import { ViewTransitions } from "astro:transitions";
 const { title, className } = Astro.props;
 import GithubIcon from "../components/icons/GithubIcon.astro";
 ---
+
+<style is:global>
+  .social-links {
+    @apply hover:text-emerald-400 transition-colors bg-neutral-600 w-0 h-12 grid place-content-center;
+    animation: slideIn 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  }
+
+  .social-links:nth-of-type(2) {
+    animation-delay: 0.2s;
+  }
+
+  .social-links:nth-of-type(3) {
+    animation-delay: 0.4s;
+  }
+
+  .social-links:nth-of-type(4) {
+    animation-delay: 0.6s;
+  }
+
+  .social-links svg {
+    @apply invisible;
+    animation: fadeVisibilty 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  }
+
+  .social-links:nth-of-type(1) svg {
+    animation-delay: 0.3s;
+  }
+
+  .social-links:nth-of-type(2 svg) {
+    animation-delay: 0.4s;
+  }
+
+  .social-links:nth-of-type(3) svg {
+    animation-delay: 0.5s;
+  }
+
+  .social-links:nth-of-type(4) svg {
+    animation-delay: 0.6s;
+  }
+
+  .slideInDown,
+  .slideInRight,
+  .slideInLeft,
+  .slideInUp {
+    animation: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  .slideInDown {
+    animation-name: slideInDown;
+  }
+
+  .slideInRight {
+    animation-name: slideInRight;
+  }
+
+  .slideInLeft {
+    animation-name: slideInLeft;
+  }
+
+  .slideInUp {
+    animation-name: slideInUp;
+  }
+
+  @keyframes slideIn {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 48px;
+    }
+  }
+
+  @keyframes fadeVisibilty {
+    from {
+      visibility: hidden;
+    }
+
+    to {
+      visibility: visible;
+    }
+  }
+
+  @keyframes slideInUp {
+    from {
+      transform: translateY(100px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInDown {
+    from {
+      transform: translateY(-100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+</style>
 
 <html lang="en">
   <head>
@@ -48,18 +174,15 @@ import GithubIcon from "../components/icons/GithubIcon.astro";
       <slot />
     </main>
 
-    <div
-      class="absolute right-0 top-1/2 -translate-y-1/2 bg-neutral-600 flex flex-col items-center gap-1 p-2 animate__animated animate__slideInRight"
-      id="social"
-    >
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col">
       <a
-        class="hover:text-emerald-400 transition-colors"
+        class="social-links slideIn"
         aria-label="Visit developer's github profile"
         href="https://github.com/mdesignscode"
         target="_blank"><GithubIcon /></a
       >
       <a
-        class="hover:text-emerald-400 transition-colors"
+        class="social-links slideIn"
         href="https://www.linkedin.com/in/marlonbaatjes"
         target="_blank"
         aria-label="Visit Marlon's LinkedIn Profile"
@@ -67,7 +190,7 @@ import GithubIcon from "../components/icons/GithubIcon.astro";
         <LinkedInIcon /></a
       >
       <a
-        class="hover:text-emerald-400 transition-colors"
+        class="social-links slideIn"
         aria-label="Chat on WhatsApp"
         href="https://wa.me/+27790226755"
         target="_blank"
@@ -75,7 +198,7 @@ import GithubIcon from "../components/icons/GithubIcon.astro";
         <WhatsAppIcon /></a
       >
       <a
-        class="hover:text-emerald-400 transition-colors"
+        class="social-links slideIn"
         href="https://codepen.io/Marlon-B"
         aria-label="View Marlon's CodePen's"
         target="_blank"><CodePenIcon /></a

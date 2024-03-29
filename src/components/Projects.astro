@@ -10,15 +10,11 @@ import ProjectCard from "./ProjectCard.astro";
 const { title, projects, key } = Astro.props;
 ---
 
-<style>
-  section {
-    opacity: 0;
-    animation: pulse 1s 0.6s, fadeIn 1s 0.6s forwards;
-  }
-</style>
-
 <section class="space-y-4">
-  <strong class="text-xl md:text-2xl">{title}</strong>
+  <strong
+    class="text-xl md:text-2xl slideInDown block opacity-0"
+    style="animation-delay:0.3s;">{title}</strong
+  >
 
   <div
     class="flex flex-col items-center gap-8 md:gap-7 md:flex-wrap md:flex-row md:justify-center"

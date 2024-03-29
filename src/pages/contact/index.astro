@@ -2,32 +2,14 @@
 import RootLayout from "@layouts/RootLayout.astro";
 ---
 
-<style>
-  main {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-  }
-
-  h1 {
-    animation: pulse 1s forwards;
-  }
-
-  .form {
-    opacity: 0;
-    animation:
-      pulse 1s 0.5s,
-      fadeIn 1s 0.5s forwards;
-  }
-</style>
-
 <RootLayout title="Contact Me">
   <h1
-    class="font-bold text-xl md:text-2xl lg:text-3xl pb-2 border-b-2 border-neutral-200"
+    class="font-bold text-xl md:text-2xl lg:text-3xl pb-2 border-b-2 border-neutral-200 slideInDown"
   >
     Let's get in touch
   </h1>
 
-  <div class="flex-1 form">
+  <div class="flex-1 slideInUp">
     <section
       class="max-w-md lg:mx-auto bg-neutral-600 p-8 rounded-md shadow-md"
     >

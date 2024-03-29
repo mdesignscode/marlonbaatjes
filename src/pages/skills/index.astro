@@ -1,6 +1,7 @@
 ---
 import RootLayout from "@layouts/RootLayout.astro";
 import Techstack from "@components/Techstack.astro";
+import SkillsSection from "@components/skillsSection.astro";
 
 const frontendTechnologies = [
     { displayName: "React.js", keyName: "Next.js" },
@@ -15,36 +16,6 @@ const frontendTechnologies = [
   ];
 ---
 
-<style is:global>
-  h1 {
-    opacity: 0;
-    animation:
-      pulse 1s,
-      fadeIn 1s forwards;
-  }
-
-  .section-1 {
-    opacity: 0;
-    animation:
-      pulse 1s 0.3s,
-      fadeIn 1s 0.3s forwards;
-  }
-
-  .section-2 {
-    opacity: 0;
-    animation:
-      pulse 1s 0.6s,
-      fadeIn 1s 0.6s forwards;
-  }
-
-  .section-3 {
-    opacity: 0;
-    animation:
-      pulse 1s 0.9s,
-      fadeIn 1s 0.9s forwards;
-  }
-</style>
-
 <RootLayout title="Skills">
   <h1
     class="font-bold text-2xl sm:text-3xl md:text-4xl pb-2 border-b-2 border-neutral-200"
@@ -53,23 +24,23 @@ const frontendTechnologies = [
   </h1>
 
   <section class="space-y-4">
-    <section class="space-y-2 section-1">
+    <SkillsSection>
       <h2 class="font-bold text-lg sm:text-xl md:text-2xl text-neutral-300">
         Technologies I use on the Front End
       </h2>
 
       <Techstack stackItems={frontendTechnologies} />
-    </section>
+    </SkillsSection>
 
-    <section class="space-y-2 section-2">
+    <SkillsSection>
       <h2 class="font-bold text-lg sm:text-xl md:text-2xl text-neutral-300">
         Technologies I use on the Back End
       </h2>
 
       <Techstack stackItems={backendTechnologies} />
-    </section>
+    </SkillsSection>
 
-    <section class="space-y-2 section-3">
+    <SkillsSection>
       <h2 class="font-bold text-lg sm:text-xl md:text-2xl text-neutral-300">
         Other tools I use
       </h2>
@@ -88,6 +59,53 @@ const frontendTechnologies = [
         <li class="list-disc ml-5">PhotoShop</li>
         <li class="list-disc ml-5">Google Lighthouse</li>
       </ul>
-    </section>
+    </SkillsSection>
   </section>
 </RootLayout>
+
+<script>
+  // Define a custom interface for Intersection Observer Options
+  interface IntersectionObserverOptions {
+    root?: Element | null;
+    rootMargin?: string;
+    threshold?: number | number[];
+  }
+
+  // Callback function to be executed when the observed elements intersect
+  const callback: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry, i) => {
+      const className = window.innerWidth < 768 ? "slideInLeft" : "slideInUp";
+
+      if (entry.isIntersecting) {
+        if (entry.target instanceof HTMLElement) {
+          entry.target.style.animationDelay = `${i * 0.25}s`;
+        }
+        entry.target.classList.add(className);
+        observer.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove(className);
+      }
+    });
+  };
+
+  // Get all elements with class 'box'
+  const boxes: NodeListOf<Element> = document.querySelectorAll(".skill-section");
+
+  // Options for the IntersectionObserver
+  const options: IntersectionObserverOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5, // When 50% of the element is visible
+  };
+
+  // Create a new IntersectionObserver with the callback and options
+  const observer: IntersectionObserver = new IntersectionObserver(
+    callback,
+    options
+  );
+
+  // Loop through each box and observe it
+  boxes.forEach((box) => {
+    observer.observe(box);
+  });
+</script>

@@ -13,7 +13,7 @@ export async function getStaticPaths() {
       "randomstuff",
       "spots",
       "portfolio",
-      "bmwi5"
+      "bmwi5",
     ],
     cloneProjectsKeys = ["airbnb", "amazon", "game-info", "qrates"],
     personalParams = personalProjectsKeys.map((title) => ({
@@ -42,39 +42,25 @@ const { title, query } = Astro.params,
     .map((image) => images[image]);
 ---
 
-<style is:global>
-  h1 {
+<style>
+  .project-details {
     opacity: 0;
-    animation: pulse 1s, fadeIn 1s forwards;
-  }
-
-  .links {
-    opacity: 0;
-    animation: pulse 1s 0.3s, fadeIn 1s 0.3s forwards;
-  }
-
-  .carousel {
-    opacity: 0;
-    animation: pulse 1s 0.6s, fadeIn 1s 0.6s forwards;
-  }
-
-  .about {
-    opacity: 0;
-    animation: pulse 1s 0.9s, fadeIn 1s 0.9s forwards;
-  }
-
-  .features,
-  .tech-stack {
-    opacity: 0;
-    animation: pulse 1s 1.2s, fadeIn 1s 1.2s forwards;
   }
 </style>
 
 <RootLayout title={projectInfo.title}>
-  <main class="px-8 w-full py-6 md:px-16 md:py-10 lg:px-40 lg:py-16 space-y-6 relative">
-    <a class="absolute -top-1 md:top-0 md:text-xl hover:underline-offset-4 underline underline-offset-2" href="/projects">All projects</a>
+  <main
+    class="w-full py-6 md:px-16 md:py-10 lg:px-40 lg:py-16 space-y-6 relative"
+  >
+    <a
+      class="absolute -top-1 md:top-0 md:text-xl hover:underline-offset-4 underline underline-offset-2 slideInDown"
+      href="/projects">All projects</a
+    >
 
-    <h1 class="text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl">
+    <h1
+      class="text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl slideInDown opacity-0"
+      style="animation-delay: 0.3s;"
+    >
       {projectInfo.title}
     </h1>
 
@@ -84,9 +70,10 @@ const { title, query } = Astro.params,
           {projectInfo.live && (
             <a
               aria-label={`Visit ${projectInfo.title}`}
-              class="label flex gap-2 items-center md:text-lg bg-neutral-600 px-2 rounded-sm hover:text-emerald-400 border-transparent hover:bg-transparent border-2 hover:border-emerald-400"
+              class="label flex gap-2 items-center md:text-lg bg-neutral-600 px-2 rounded-sm hover:text-emerald-400 border-transparent hover:bg-transparent border-2 hover:border-emerald-400 slideInDown opacity-0"
               target="_blank"
               href={projectInfo.live}
+              style="animation-delay: 0.6s;"
             >
               <ExternalLinkIcon />
               <span class="uppercase text-sm tracking-widest">
@@ -98,11 +85,17 @@ const { title, query } = Astro.params,
           {projectInfo.source && (
             <a
               aria-label={`View the source code for ${projectInfo.title}`}
-              class="flex gap-2 items-center md:text-lg hover:text-emerald-400 group relative"
+              class="flex gap-2 items-center md:text-lg hover:text-emerald-400 group relative slideInDown opacity-0"
+              style={`animation-delay: ${projectInfo.live ? "0.8s" : "0.6s"}`}
               target="_blank"
               href={projectInfo.source}
             >
-              <span aria-hidden="true" class="absolute left-1/2 -translate-x-1/2 bottom-0 opacity-0 group-hover:opacity-100 group-hover:bottom-full whitespace-nowrap label">Source Code</span>
+              <span
+                aria-hidden="true"
+                class="absolute left-1/2 -translate-x-1/2 bottom-0 opacity-0 group-hover:opacity-100 group-hover:bottom-full whitespace-nowrap label"
+              >
+                Source Code
+              </span>
               <GithubIcon />
             </a>
           )}
@@ -112,7 +105,7 @@ const { title, query } = Astro.params,
 
     <ImageCarousel images={titleImages} />
 
-    <section class="about">
+    <section class="project-details">
       <h2 class="font-bold text-lg md:text-xl lg:text-2xl">
         About this project
       </h2>
@@ -124,7 +117,7 @@ const { title, query } = Astro.params,
 
     {
       projectInfo.features && (
-        <section class="features">
+        <section class="project-details">
           <h2 class="font-bold text-lg md:text-xl lg:text-2xl">Features</h2>
 
           <ul class="md:text-lg lg:text-xl">
@@ -136,7 +129,7 @@ const { title, query } = Astro.params,
       )
     }
 
-    <section class="tech-stack">
+    <section class="project-details">
       <h2 class="font-bold text-lg md:text-xl lg:text-2xl">
         This project was built using
       </h2>
@@ -153,7 +146,7 @@ const { title, query } = Astro.params,
     {
       projectInfo.technicalDetails && (
         <section>
-          <h2 class="font-bold text-lg md:text-xl lg:text-2xl">
+          <h2 class="font-bold text-lg md:text-xl lg:text-2xl project-details">
             Technical details
           </h2>
 
@@ -161,7 +154,9 @@ const { title, query } = Astro.params,
             {projectInfo.technicalDetails.map((detail) =>
               detail
                 .split("\n")
-                .map((text) => <li class="list-disc ml-4">{text}</li>)
+                .map((text) => (
+                  <li class="list-disc ml-4 project-details">{text}</li>
+                ))
             )}
           </ul>
         </section>
@@ -169,3 +164,51 @@ const { title, query } = Astro.params,
     }
   </main>
 </RootLayout>
+
+<script>
+  // Define a custom interface for Intersection Observer Options
+  interface IntersectionObserverOptions {
+    root?: Element | null;
+    rootMargin?: string;
+    threshold?: number | number[];
+  }
+
+  // Callback function to be executed when the observed elements intersect
+  const callback: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry, i) => {
+      const className = "slideInUp";
+
+      if (entry.isIntersecting) {
+        if (entry.target instanceof HTMLElement) {
+          entry.target.style.animationDelay = `${i * 0.25}s`;
+        }
+        entry.target.classList.add(className);
+        observer.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove(className);
+      }
+    });
+  };
+
+  // Get all elements with class 'box'
+  const boxes: NodeListOf<Element> =
+    document.querySelectorAll(".project-details");
+
+  // Options for the IntersectionObserver
+  const options: IntersectionObserverOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  // Create a new IntersectionObserver with the callback and options
+  const observer: IntersectionObserver = new IntersectionObserver(
+    callback,
+    options
+  );
+
+  // Loop through each box and observe it
+  boxes.forEach((box) => {
+    observer.observe(box);
+  });
+</script>

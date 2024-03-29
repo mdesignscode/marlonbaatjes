@@ -5,68 +5,27 @@ import Marlon from "@assets/marlon.png";
 import { Image } from "astro:assets";
 ---
 
-<style>
-  main {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-  }
-
-  .image {
-    opacity: 0;
-    animation: fadeInLeft 1.4s 1s forwards;
-  }
-
-  .text {
-    opacity: 0;
-    animation: fadeInRight 1.6s 1.2s forwards;
-  }
-
-  .links {
-    opacity: 0;
-    animation: fadeIn 1s 1s forwards;
-  }
-
-  .background-1,
-  .background-2,
-  .background-3 {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-  }
-
-  .background-1 {
-    animation-delay: 2s;
-  }
-
-  .background-2 {
-    animation-delay: 1.5s;
-  }
-
-  .background-3 {
-    animation-delay: 1s;
-  }
-</style>
-
 <RootLayout
   className="flex flex-col justify-center items-center h-full px-14 gap-8 text-lg sm:text-xl lg:flex-row lg:text-2xl relative overflow-x-hidden"
   title="Home"
 >
   <div
     aria-hidden="true"
-    class="absolute bottom-14 -right-6 md:top-10 md:left-20 w-40 h-40 bg-emerald-600 rounded-full blur-2xl background-1"
+    class="absolute bottom-14 -right-6 md:top-10 md:left-20 w-40 h-40 bg-emerald-600 rounded-full blur-2xl -z-10"
   >
   </div>
   <div
     aria-hidden="true"
-    class="hidden md:block absolute bottom-20 right-80 w-52 h-52 bg-emerald-600 rounded-full blur-2xl background-2"
+    class="hidden md:block absolute bottom-20 right-80 w-52 h-52 bg-emerald-600 rounded-full blur-2xl -z-10"
   >
   </div>
   <div
     aria-hidden="true"
-    class="absolute -top-10 -left-10 md:left-auto md:right-0 w-60 h-60 md:w-80 md:h-80 bg-emerald-600 rounded-full blur-2xl background-3"
+    class="absolute -top-10 -left-10 md:left-auto md:right-0 w-60 h-60 md:w-80 md:h-80 bg-emerald-600 rounded-full blur-2xl -z-10"
   >
   </div>
   <div
-    class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg image"
+    class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full bg-neutral-700 shadow-dark shadow-lg image slideInLeft"
   >
     <Image
       src={Marlon}
@@ -76,21 +35,21 @@ import { Image } from "astro:assets";
   </div>
 
   <div class="text-center lg:text-start space-y-4">
-    <div class="space-y-2 text">
+    <div class="space-y-2 text slideInRight">
       <strong class="text-xl sm:text-2xl md:text-3xl lg:text-4xl"
         >Hi there, I'm Marlon Baatjes</strong
       >
-      <p>I love creating feature packed applications for the web</p>
+      <p>I love creating responsive and interactive React web apps</p>
     </div>
 
     <div class="flex justify-between items-center text-sm gap-4 links">
-      <PrimaryLink href="/projects" styles="btn-primary" animation="link-1">
+      <PrimaryLink href="/projects" styles="btn-primary" animation="slideInUp">
         My projects
       </PrimaryLink>
 
       <PrimaryLink
         styles="hover:text-neutral-600 text-neutral-500 md:text-inherit btn-primary"
-        animation="link-2"
+        animation="slideInUp"
         href="/contact"
       >
         <p>Contact me</p>
