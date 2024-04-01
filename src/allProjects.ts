@@ -104,6 +104,16 @@ const allProjects: IAllProjects = {
       ],
       title: "Portfolio"
     },
+    monty: {
+      title: "Monty Bytescode interpreter",
+      summary: "A bytescode interpreter using `Stack` and `Queue` data structures",
+      description: "A command line interpreter that stores items in a list, which can either use a Stack, or a Queue data structure behind the scenes, and allows for switching between the two. The Stack and Queue are implemented using a Doubly Linked List data structure.",
+      preview: "/src/assets/projects/personal/monty/Monty.png",
+      techStack: [
+        "C"
+      ],
+      source: "https://github.com/mdesignscode/monty/"
+    },
     bmwi5: {
       description: "This project was developed to learn more about front end development and features parallex scroll.",
       summary: "A showcase of the BMW i5",
