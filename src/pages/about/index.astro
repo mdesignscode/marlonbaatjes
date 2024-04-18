@@ -1,0 +1,111 @@
+---
+import RootLayout from "@layouts/RootLayout.astro";
+import CoverArtDesigns from "@components/CoverArtDesigns.tsx";
+import AboutMe from "@components/AboutMe.astro";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/cover_art/*.jpg"
+);
+---
+
+<style>
+  @tailwind utilities;
+
+  #specialty {
+    @apply bg-white group-hover:bg-emerald-600 w-0 h-1 rounded-full;
+    animation: progress cubic-bezier(0.165, 0.84, 0.44, 1) 1s forwards;
+  }
+
+  @keyframes progress {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
+  }
+</style>
+
+<RootLayout title="About">
+  <div class="space-y-4">
+    <h1
+      class="font-bold text-2xl sm:text-3xl md:text-4xl pb-2 border-b-2 border-neutral-200 opacity-0 slideInDown"
+    >
+      About Me
+    </h1>
+
+    <div class="space-y-8 md:space-y-0 flex flex-col md:flex-row-reverse">
+      <AboutMe />
+
+      <CoverArtDesigns images={Object.keys(images)} client:visible />
+    </div>
+  </div>
+</RootLayout>
+
+<script>
+  // Define a custom interface for Intersection Observer Options
+  interface IntersectionObserverOptions {
+    root?: Element | null;
+    rootMargin?: string;
+    threshold?: number | number[];
+  }
+
+  // Options for the IntersectionObserver
+  const options: IntersectionObserverOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  // Callback function to be executed when the observed elements intersect
+  const callback: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry, i) => {
+      const className = "slideInUp";
+
+      if (entry.isIntersecting) {
+        if (entry.target instanceof HTMLElement) {
+          entry.target.style.animationDelay = `${i * 0.25}s`;
+        }
+        entry.target.classList.add(className);
+        observer.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove(className);
+      }
+    });
+  };
+
+  const boxes: NodeListOf<Element> = document.querySelectorAll(".info-item"),
+    coverImages: NodeListOf<Element> =
+      document.querySelectorAll(".cover-image");
+
+  const coverImagesObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      const className = "puffIn";
+
+      if (entry.isIntersecting) {
+        if (entry.target instanceof HTMLElement) {
+          entry.target.style.animationDelay = `${i * 0.25}s`;
+        }
+        entry.target.classList.add(className);
+        coverImagesObserver.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove(className);
+      }
+    });
+  }, options);
+
+  // Create a new IntersectionObserver with the callback and options
+  const observer: IntersectionObserver = new IntersectionObserver(
+    callback,
+    options
+  );
+
+  // Loop through each box and observe it
+  boxes.forEach((box) => {
+    observer.observe(box);
+  });
+  coverImages.forEach((box) => {
+    coverImagesObserver.observe(box);
+  });
+</script>

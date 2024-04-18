@@ -2,6 +2,29 @@ import { createSignal } from "solid-js";
 import "./styles/hamburgers.css";
 import "./styles/index.css";
 
+const navLinks = [
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "Projects",
+    path: "/projects",
+  },
+  {
+    name: "Contact Me",
+    path: "/contact",
+  },
+  {
+    name: "My skills",
+    path: "/skills",
+  },
+  {
+    name: "About me",
+    path: "/about",
+  },
+];
+
 export default function Navbar() {
   const [showNavbar, setShowNavbar] = createSignal(false),
     [isMobile, setIsMobile] = createSignal(window.innerWidth < 768);
@@ -41,34 +64,17 @@ export default function Navbar() {
             showNavbar() ? "opacity-100" : "opacity-0"
           } transition-all duration-500 flex flex-col text-2xl justify-center items-center h-full w-3/6 m-auto text-center gap-6`}
         >
-          <a
-            onClick={() => setShowNavbar(false)}
-            class="nav-item px-4 py-2 w-full"
-            href="/"
-          >
-            Home
-          </a>
-          <a
-            onClick={() => setShowNavbar(false)}
-            class="nav-item px-4 py-2 w-full"
-            href="/projects"
-          >
-            Projects
-          </a>
-          <a
-            onClick={() => setShowNavbar(false)}
-            class="nav-item px-4 py-2 w-full"
-            href="/contact"
-          >
-            Contact me
-          </a>
-          <a
-            onClick={() => setShowNavbar(false)}
-            class="nav-item px-4 py-2 w-full"
-            href="/skills"
-          >
-            My skills
-          </a>
+          {navLinks
+            .sort((a, b) => (a.name > b.name ? 1 : 0))
+            .map(({ name, path }) => (
+              <a
+                onClick={() => setShowNavbar(false)}
+                class="nav-item px-4 py-2 w-full"
+                href={path}
+              >
+                {name}
+              </a>
+            ))}
         </div>
       </nav>
     </>
