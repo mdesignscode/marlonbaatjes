@@ -1,4 +1,4 @@
-import { createSignal, type Accessor, type Setter } from "solid-js";
+import { createSignal, type Setter } from "solid-js";
 
 export default function CoverArtDesigns({ images }: { images: string[] }) {
   const [currentIndex, setCurrentIndex] = createSignal(0),
@@ -34,9 +34,10 @@ export default function CoverArtDesigns({ images }: { images: string[] }) {
               id={`show-design-${i}`}
             >
               <img
+                loading="lazy"
                 class="rounded-sm"
                 alt={`Cover art design ${i + 1}`}
-                src={path}
+                src={path.replace("/src/assets", "")}
               />
             </button>
           ))}

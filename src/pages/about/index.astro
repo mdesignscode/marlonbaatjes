@@ -4,7 +4,7 @@ import CoverArtDesigns from "@components/CoverArtDesigns.tsx";
 import AboutMe from "@components/AboutMe.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/cover_art/*.jpg"
+  "/src/assets/cover_art/*"
 );
 ---
 
