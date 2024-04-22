@@ -24,7 +24,7 @@ export default function CoverArtDesigns({ images }: { images: string[] }) {
         </p>
 
         <div class="flex flex-wrap gap-4 my-auto py-4">
-          {Object.values(images).map((path, i) => (
+          {images.map((path, i) => (
             <button
               onClick={() => setCurrentIndex(i + 1)}
               class="md:w-[30%] aspect-square transition-all opacity-0 cover-image"
@@ -79,7 +79,7 @@ export default function CoverArtDesigns({ images }: { images: string[] }) {
           {
             <img
               class="md:w-1/2 relative z-30"
-              src={images[currentIndex() - 1]}
+              src={images[currentIndex() - 1]?.replace("/src/assets", "")}
               alt="Opened cover design"
               aria-live="polite"
             />
@@ -205,7 +205,10 @@ function DesktopNavigation({
           }, 300);
         }}
       >
-        <img src={images[getPrevIndex()]} alt="Next design" />
+        <img
+          src={images[getPrevIndex()]?.replace("/src/assets", "")}
+          alt="Next design"
+        />
       </button>
 
       <button
@@ -223,7 +226,10 @@ function DesktopNavigation({
           }, 300);
         }}
       >
-        <img src={images[getNextIndex()]} alt="Next design" />
+        <img
+          src={images[getNextIndex()]?.replace("/src/assets", "")}
+          alt="Next design"
+        />
       </button>
     </div>
   );
