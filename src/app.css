@@ -1,0 +1,21 @@
+@import '@fontsource/fira-mono';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+        .glass-effect {
+                @apply bg-white/30 backdrop-blur-sm rounded-md;
+        }
+
+        .overlay::after {
+                @apply transition-all backdrop-blur-[2px] bg-black/30 size-full absolute top-0 left-0 -z-10;
+                content: "";
+        }
+
+        .overlay {
+                @apply relative z-10;
+        }
+}
+
+@plugin '@tailwindcss/typography'
