@@ -4,6 +4,7 @@
         import Transition from 'svelte-transition';
         import { onNavigate } from "$app/navigation";
         import { isNavigating } from "globalStore";
+        import allProjects from "./projects/allProjects";
 
         let destination = $state("");
         let active = $state(false);
@@ -11,7 +12,10 @@
         onNavigate(e => {
                 if (!e.to) return;
 
-                destination = e.to.url.pathname;
+                const { query, title } = e.to.params;
+
+                if (query && title) destination = allProjects[query][title].title
+                else destination = e.to.url.pathname;
                 if (!destination) return;
 
                 // start exit animations
@@ -30,11 +34,16 @@
                 })
         });
 
-        const navOptions = {
+        const options = {
                 "/": "No place like home",
                 "/about": "Gathering info about me",
                 "/projects": "Organizing my projects",
-        }
+        };
+        const navOptions = new Proxy(options, {
+                get(target, prop) {
+                        return target[prop] ?? `Unpacking ${prop}`;
+                }
+        });
 
         const links = [
                 { title: "Home", url: "/" },
@@ -52,7 +61,14 @@
         leaveFrom="top-0"
         leaveTo="top-full"
 >
-        <div class={["page-transition", "h-full w-screen absolute top-0 left-0 z-[99999]", "flex flex-col justify-center items-center gap-6 text-lg", "background"]} data-destination={destination}>
+        <div
+                class={[
+                        "page-transition", "h-full w-screen absolute top-0 left-0 z-[99999]",
+                        "flex flex-col justify-center items-center gap-6 text-lg",
+                        "background"
+                ]}
+                data-destination={Object.keys(navOptions).includes(destination) ? destination : "project"}
+        >
                 <Transition
                         enter="duration-[1s] delay-[1.6s]"
                         enterFrom="opacity-0 scale-50"
@@ -105,7 +121,7 @@
         <nav
                 class={[
                         !active && "w-0 opacity-0",
-                        "flex-1 overflow-x-auto overflow-y-hidden overflow-x-hidden",
+                        "flex-1 overflow-y-hidden overflow-x-hidden",
                 ]}
         >
                 <ul class="flex gap-4 px-4">
@@ -125,6 +141,10 @@
 </header>
 
 <style>
+        .background[data-destination="project"] {
+                @apply bg-violet-400;
+        }
+
         .background[data-destination="/projects"] {
                 @apply bg-blue-400;
         }
