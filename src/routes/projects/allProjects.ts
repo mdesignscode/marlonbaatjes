@@ -76,7 +76,7 @@ const allProjects: IAllProjects = {
                 },
                 triviamania: {
                         isFeatured: true,
-                        live: "https://triviamania.vercel.app",
+                        live: "https://trivia-mania.onrender.com",
                         source: "https://github.com/mdesignscode/trivia_mania",
                         preview: "/projects/personal/triviamania/Trivia Mania.png",
                         title: "Trivia Mania",
