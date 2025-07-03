@@ -1,28 +1,28 @@
 <script lang="ts">
-        import "animations";
-	import { onMount, tick } from "svelte";
+	import 'animations';
+	import { onMount, tick } from 'svelte';
 
 	const allSkills = [
-		"Web Developer",
-		"IT Specialist",
-		"Linux Enthusiast",
-		"Problem Solver",
-		"Gamer",
-		"Music Lover",
-		"Creative Designer",
-		"Internet Power User"
+		'Web Developer',
+		'IT Specialist',
+		'Linux Enthusiast',
+		'Problem Solver',
+		'Gamer',
+		'Music Lover',
+		'Creative Designer',
+		'Internet Power User'
 	];
 
-	let skill = "";
+	let skill = '';
 	let index = 0;
 
 	let prefersAnimations = false;
 	onMount(() => {
-		if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+		if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 			prefersAnimations = true;
 		}
 
-                setTimeout(() => typeEffect(), 3200);
+		setTimeout(() => typeEffect(), 3200);
 	});
 
 	async function typeEffect() {
@@ -52,20 +52,26 @@
 	}
 
 	function delay(ms: number) {
-		return new Promise(resolve => setTimeout(resolve, ms));
+		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 </script>
 
-<div class="relative w-fit pl-2 fade-in">
-        <!-- decorative box -->
-        <span class="bg-white text-white absolute w-full h-1/2 -skew-x-6 -skew-y-[2deg] bottom-1 left-0" aria-hidden="true"></span>
+<div class="fade-in relative w-fit pl-2">
+	<!-- decorative box -->
+	<span
+		class="absolute bottom-1 left-0 h-1/2 w-full -skew-x-6 -skew-y-[2deg] bg-white text-white"
+		aria-hidden="true"
+	></span>
 
-        <p class="relative z-10 text-dark text-sm">{skill}<span class="blinking-cursor">|</span></p>
+	<p class="text-dark relative z-10 text-sm">{skill}<span class="blinking-cursor">|</span></p>
 </div>
 
 <style>
-        .fade-in { opacity:0;animation: fadeIn 1s ease 2s forwards; }
-        .blinking-cursor {
+	.fade-in {
+		opacity: 0;
+		animation: fadeIn 1s ease 2s forwards;
+	}
+	.blinking-cursor {
 		display: inline-block;
 		width: 0.6em;
 		animation: blink 1s infinite;
@@ -75,6 +81,5 @@
 		50% {
 			opacity: 0;
 		}
-        }
+	}
 </style>
-

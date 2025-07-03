@@ -124,7 +124,7 @@ const allProjects: IAllProjects = {
                                 "My portfolio, initially written in Next.js, but re-implemented in Astro",
                         summary: "My portfolio website",
                         preview: "/projects/personal/portfolio/Marlon Baatjes.png",
-                        techStack: ["Astro", "Solid.js", "Tailwind CSS", "Typescript"],
+                        techStack: ["Svelte.js", "Headless UI", "Tailwind CSS", "Typescript"],
                         title: "Portfolio",
                 },
                 bmwi5: {

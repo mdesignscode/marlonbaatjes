@@ -1,20 +1,16 @@
-export function inView(node: HTMLElement, cls: string) {
+export function inView(node: HTMLElement, callback: () => void) {
         $effect(() => {
                 const observer = new IntersectionObserver(
                         ([entry]) => {
-                                if (entry.isIntersecting) {
-                                        node.classList.add(cls);
-                                        observer.unobserve(node); // remove to allow once-only trigger
-                                }
+                                if (entry.isIntersecting) callback();
                         },
-                        { threshold: 0.1 }
+                        { threshold: 0.3 }
                 );
-
                 observer.observe(node);
 
                 return () => {
                         observer.unobserve(node);
                 };
-        })
+        });
 }
 

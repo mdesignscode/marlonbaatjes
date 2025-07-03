@@ -9,6 +9,7 @@ import Github from "./Github.svelte";
 import HTML from "./HTML.svelte";
 import Jest from "./Jest.svelte";
 import JS from "./JS.svelte";
+import LinkedIn from './LinkedIn.svelte';
 import Linux from "./Linux.svelte";
 import Nextjs from "./Nextjs.svelte";
 import Nvim from "./Nvim.svelte";
@@ -26,6 +27,6 @@ import WhatsApp from "./WhatsApp.svelte";
 export {
         Python, CSS, HTML, Nvim, Git, Linux, Photoshop, Scss, VSCode,
         Nextjs, React, C, Flask, Jest, Github, TS, Tailwind, JS, SQL,
-        WhatsApp, CodePen, Close, Reddit, Connect,
+        WhatsApp, CodePen, Close, Reddit, Connect, LinkedIn,
 };
 
