@@ -1,10 +1,10 @@
 <script>
 	import 'animations';
 	let { children, title } = $props();
-	import { isNavigating } from 'globalStore';
+	import { store } from 'store';
 </script>
 
-<li class={['about__card overlay group', $isNavigating ? 'animOut' : 'animIn']}>
+<li class={['about__card overlay group', store.isNavigating ? 'animOut' : 'animIn']}>
 	<h2 class="text-lg">{title}</h2>
 
 	<div
@@ -92,3 +92,4 @@
 		}
 	}
 </style>
+

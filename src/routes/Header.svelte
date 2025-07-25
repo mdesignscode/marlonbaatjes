@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 	import Transition from 'svelte-transition';
 	import { onNavigate } from '$app/navigation';
-	import { isNavigating } from 'globalStore';
+	import { store } from 'store';
 	import allProjects from './projects/allProjects';
 	import { createDisclosure } from 'svelte-headlessui';
 	import { fly, slide } from 'svelte/transition';
@@ -15,39 +15,13 @@
 	const navbar = createDisclosure({ expanded: false });
 
 	onNavigate((e) => {
-		if (!e.to) return;
-
-		const { query, title } = e.to.params;
-
-		if (query && title) destination = allProjects[query][title].title;
-		else destination = e.to.url.pathname;
-		if (!destination) return;
-
-		// start exit animations
-		isNavigating.update(() => true);
-
-		// close navbar
-		navbar.close();
+		store.isNavigating = true;
 
 		return new Promise((resolve) => {
 			setTimeout(() => {
-				// end transition
-				isNavigating.update(() => false);
-				destination = '';
 				resolve();
-			}, 4000 /* Display page transition */);
+			}, 500);
 		});
-	});
-
-	const options = {
-		'/': 'No place like home',
-		'/about': 'Gathering info about me',
-		'/projects': 'Organizing my projects'
-	};
-	const navOptions = new Proxy(options, {
-		get(target, prop) {
-			return target[prop] ?? `Unpacking ${prop}`;
-		}
 	});
 
 	const links = [
@@ -80,55 +54,6 @@
 	];
 </script>
 
-<Transition
-	show={$isNavigating}
-	enter="duration-[1.8s] delay-[1s]"
-	enterFrom="-top-full"
-	enterTo="top-0"
-	leave="duration-[1s]"
-	leaveFrom="top-0"
-	leaveTo="top-full"
->
-	<div
-		class={[
-			'page-transition',
-			'absolute left-0 top-0 z-[99999] h-full w-screen',
-			'flex flex-col items-center justify-center gap-6 text-lg',
-			'background'
-		]}
-		data-destination={Object.keys(navOptions).includes(destination) ? destination : 'project'}
-	>
-		<Transition
-			enter="duration-[1s] delay-[1.6s]"
-			enterFrom="opacity-0 scale-50"
-			enterTo="opacity-100 scale-100"
-			leave="duration-200 transition ease-in-out"
-			leaveFrom="opacity-100 rotate-0 scale-100"
-			leaveTo="opacity-0 scale-95"
-		>
-			<img src="/marlon_avatar.png" alt="" class="w-20" />
-		</Transition>
-		<Transition
-			enter="duration-[1s] delay-[1.8s]"
-			enterFrom="opacity-0 translate-y-4"
-			enterTo="opacity-100 translate-y-0"
-			leave="duration-200 transition ease-in-out"
-			leaveFrom="opacity-100 rotate-0 scale-100"
-			leaveTo="opacity-0 scale-95"
-		>
-			<div class="flex items-end text-white drop-shadow">
-				<p class="animate-pulse">{navOptions[destination]}</p>
-
-				<div class="ml-1 flex gap-1 pb-[8px]">
-					<span class="size-1 animate-bounce rounded-full bg-white [animation-delay:0s]"></span>
-					<span class="size-1 animate-bounce rounded-full bg-white [animation-delay:0.2s]"></span>
-					<span class="size-1 animate-bounce rounded-full bg-white [animation-delay:0.4s]"></span>
-				</div>
-			</div>
-		</Transition>
-	</div>
-</Transition>
-
 {#if $contactInfo.expanded}
 	<section
 		use:contactInfo.panel
@@ -160,7 +85,7 @@
 	<button
 		use:navbar.button
 		aria-label={$navbar.expanded ? 'Close navigation' : 'Open navigation'}
-		class={['hamburger hamburger--emphatic relative z-50', $navbar.expanded && 'is-active']}
+		class={['hamburger hamburger--emphatic relative z-50 print:hidden', $navbar.expanded && 'is-active']}
 		type="button"
 	>
 		<span class="hamburger-box grid place-items-center">
@@ -192,21 +117,6 @@
 <style>
 	:global(#social-links svg) {
 		@apply size-8 text-white;
-	}
-	.background[data-destination='project'] {
-		@apply bg-violet-400;
-	}
-
-	.background[data-destination='/projects'] {
-		@apply bg-blue-400;
-	}
-
-	.background[data-destination='/'] {
-		@apply bg-vanilla;
-	}
-
-	.background[data-destination='/about'] {
-		@apply bg-violet-400;
 	}
 
 	ul,

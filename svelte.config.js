@@ -18,7 +18,8 @@ const config = {
                         animations: 'src/routes/styles/animations.css',
                         icons: 'src/routes/components/icons/',
                         components: 'src/routes/components/',
-                        globalStore: 'src/routes/store.ts',
+                        store: 'src/utils/store.svelte.ts',
+                        utils: 'src/utils/index.ts',
                         inView: 'src/lib/actions/use:inView.svelte.ts',
                 }
         }

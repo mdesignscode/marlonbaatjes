@@ -1,10 +1,19 @@
 <script lang="ts">
 	import 'animations';
-	import { slide, scale } from 'svelte/transition';
+	import { scale, fly } from 'svelte/transition';
 	import { inView } from 'inView';
-	import { isNavigating } from 'globalStore';
+	import { store } from 'store';
 	import { createDisclosure } from 'svelte-headlessui';
+        import { flyTransition, slideTransition } from 'utils';
+        import { onMount } from 'svelte';
 
+        let mounted = $state(false);
+        onMount(() => {
+                store.isNavigating = false;
+
+                mounted = true;
+                return () => mounted = false;
+        });
 	let { projectsList } = $props();
 
 	const filters = createDisclosure({ expanded: false });
@@ -43,17 +52,18 @@
 			value === 'All' ? true : techStack.includes(value)
 		);
 	};
-	const filterStyles = 'flex gap-4 glass-effect w-fit p-2 mx-auto items-center';
+	const filterStyles = 'flex gap-4 glass-effect accent w-fit p-2 mx-auto items-center';
 </script>
 
 <div class="projects flex h-dvh flex-col md:hidden">
+        {#if mounted && !store.isNavigating}
 	<div class="sticky top-2 flex flex-col gap-2">
 		<button
 			class={[
-				'glass-effect mx-auto mt-4 w-fit p-2',
-				$isNavigating ? 'animFadeOutUp' : 'animFadeInDown'
+				'glass-effect accent mx-auto mt-4 w-fit p-2',
 			]}
 			use:filters.button
+                        transition:fly={flyTransition()}
 		>
 			{#if $filters.expanded}
 				Hide filters
@@ -63,13 +73,13 @@
 		</button>
 
 		{#if $filters.expanded}
-			<div class={filterStyles} use:filters.panel transition:slide>
+			<div class={filterStyles} use:filters.panel transition:fly={flyTransition()}>
 				<p>Project type:</p>
 
 				<select
 					id="filter"
 					bind:value={typeFilter.key}
-					class="glass-effect p-1"
+					class="glass-effect accent p-1"
 					onchange={handleSelectChangeGroup}
 				>
 					{#each Object.values(filterOptions) as option}
@@ -78,13 +88,13 @@
 				</select>
 			</div>
 
-			<div class={filterStyles} use:filters.panel transition:slide={{ delay: 200 }}>
+			<div class={filterStyles} use:filters.panel transition:fly={flyTransition(200)}>
 				<p>Language/Framework:</p>
 
 				<select
 					id="filter"
 					bind:value={languageFilter}
-					class="glass-effect p-1"
+					class="glass-effect accent p-1"
 					onchange={handleSelectChangeLang}
 				>
 					{#each stacks as stack}
@@ -94,16 +104,18 @@
 			</div>
 		{/if}
 	</div>
+        {/if}
 
 	<div
 		class="projects__container mt-8 flex flex-1 flex-col items-center gap-2 overflow-y-auto pb-4 w-full"
 	>
 		{#each filteredProjects as project, i}
                         <div use:inView={() => (projectCards[i] = true)} class="w-5/6 aspect-video">
-				{#if projectCards[i]}
+                                {#if projectCards[i] && (!store.isNavigating && mounted)}
 					<div
-						transition:scale
-						class={['w-full space-y-2 rounded-md bg-white/30 p-4 backdrop-blur-sm']}
+						in:scale
+                                                out:fly={slideTransition(0, !(i % 2) ? -100 : 100)}
+						class={['w-full space-y-2 glass-effect accent p-4']}
 					>
 						<div class="flex justify-between">
 							<p>{project.title}</p>
@@ -114,7 +126,7 @@
 							>
 						</div>
 						<img
-							class="aspect-video rounded-md"
+							class="w-full aspect-video rounded-md"
 							src={project.preview}
 							alt={`${project.title} preview`}
 						/>
@@ -125,34 +137,4 @@
 		{/each}
 	</div>
 </div>
-
-<style>
-	.projects {
-		background-image: url('/wp14543200-minion-4k-mobile-wallpapers.jpg');
-	}
-
-	.projectExit:nth-child(odd) {
-		animation: fadeOutRight 0.8s ease both;
-	}
-
-	.projectExit:nth-child(even) {
-		animation: fadeOutLeft 0.6s ease both;
-	}
-
-	:global(.projectEnter) {
-		animation: fadeInLeft 1.2s ease both;
-	}
-
-	@keyframes fadeInLeft {
-		from {
-			opacity: 0;
-			transform: translateX(-50px);
-		}
-
-		to {
-			opacity: 1;
-			transform: translateX(0px);
-		}
-	}
-</style>
 

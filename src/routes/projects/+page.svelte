@@ -21,10 +21,3 @@
 	<DesktopView {projectsList}><p class="text-2xl text-white">child</p></DesktopView>
 </section>
 
-<style>
-	:global(.projects) {
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-	}
-</style>

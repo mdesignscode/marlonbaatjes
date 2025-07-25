@@ -121,7 +121,7 @@ const allProjects: IAllProjects = {
                 },
                 portfolio: {
                         description:
-                                "My portfolio, initially written in Next.js, but re-implemented in Astro",
+                                "My portfolio, initially written in Next.js, but re-implemented in Astro, and now, a design I'm finally happy with, using Svelte.js",
                         summary: "My portfolio website",
                         preview: "/projects/personal/portfolio/Marlon Baatjes.png",
                         techStack: ["Svelte.js", "Headless UI", "Tailwind CSS", "Typescript"],
@@ -143,6 +143,7 @@ const allProjects: IAllProjects = {
                         title: "BMW i5 eDrive40",
                         live: "https://bmw-i5.vercel.app/#",
                         source: "https://github.com/mdesignscode/bmw-i5",
+                        isFeatured: true,
                 },
         },
         clones: {
@@ -193,6 +194,7 @@ const allProjects: IAllProjects = {
                         summary: "A front end clone of Qrates' For Artists page",
                         description: "Replicates: responsive design, css grid",
                         techStack: ["React.js", "Tailwind CSS", "Vite", "Typescript"],
+                        isFeatured: true,
                 },
         },
         fcc: {
