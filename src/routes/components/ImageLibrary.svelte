@@ -20,7 +20,7 @@
                                         transition:scale|global={{ delay: index * 1.15 }}
 					{src}
 					alt=""
-					class="inline-block aspect-square w-[calc(100%/4)] md:w-[calc(100%/6)] lg:w-[calc(100%/9)]"
+					class="inline-block aspect-square w-[calc(100%/4)] md:w-[calc(100%/6)] xl:w-[calc(100%/7)]"
 				/>
 			{/each}
 		</div>

@@ -26,7 +26,6 @@
 
 	const links = [
 		{ title: 'Home', url: '/' },
-		{ title: 'About', url: '/about' },
 		{ title: 'Projects', url: '/projects' }
 	];
 
@@ -99,7 +98,7 @@
 				{#each links as link, index}
 					<li
 						transition:fly|global={{ x: 100, delay: index * 100 }}
-						aria-current={page.url.pathname === link.url ? 'page' : undefined}
+                                                aria-current={new RegExp(`${link.url}(?=\/|$)`).test(page.url.pathname) ? 'page' : undefined}
 					>
 						<a href={link.url}>{link.title}</a>
 					</li>

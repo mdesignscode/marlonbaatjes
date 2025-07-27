@@ -1,3 +1,4 @@
+import Android from "./Android.svelte";
 import C from "./C.svelte";
 import CSS from "./CSS.svelte";
 import Close from "./Close.svelte";
@@ -14,6 +15,7 @@ import Jest from "./Jest.svelte";
 import JS from "./JS.svelte";
 import LinkedIn from './LinkedIn.svelte';
 import Linux from "./Linux.svelte";
+import Magisk from "./Magisk.svelte";
 import Nextjs from "./Nextjs.svelte";
 import Nodejs from './Nodejs.svelte';
 import Nvim from "./Nvim.svelte";
@@ -30,11 +32,13 @@ import TS from "./TS.svelte";
 import VSCode from "./VSCode.svelte";
 import WhatsApp from "./WhatsApp.svelte";
 import Windows from "./Windows.svelte";
+import Zsh from "./Zsh.svelte";
 
 export {
         Python, CSS, HTML, Nvim, Git, Linux, Photoshop, Scss, VSCode,
         Nextjs, React, C, Flask, Jest, Github, TS, Tailwind, JS, SQL,
         WhatsApp, CodePen, Close, Reddit, Connect, LinkedIn, Portfolio,
         Svelte, Express, Nodejs, DoubleArrow, ExternalLink, Windows,
+        Magisk, Android, Zsh,
 };
 

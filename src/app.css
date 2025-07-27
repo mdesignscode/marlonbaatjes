@@ -5,11 +5,7 @@
 
 @layer utilities {
         .glass-effect {
-                @apply bg-white/30 backdrop-blur-md rounded-md;
-        }
-
-        .glass-effect.accent {
-                @apply bg-honey-gold/60 text-white;
+                @apply bg-honey-gold/60 text-white backdrop-blur-md rounded-md;
         }
 
         .overlay::after {

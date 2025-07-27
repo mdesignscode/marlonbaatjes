@@ -20,11 +20,16 @@
 		Photoshop,
 		Linux,
 		Github,
-		Windows
+                Windows,
+                Magisk,
+                Android,
+                C,
+                Zsh,
 	} from 'icons';
 
 	const FETools = [Nextjs, Svelte, React, TS, Tailwind];
-	const BETools = [Python, Flask, Nodejs, Express];
+	const BETools = [C, Python, Flask, Nodejs, Express];
+        const SysTools = [Linux, Windows, Zsh, Github, Android, Magisk];
 
 	const itemsInView = 6;
 	const viewElements = $state(Array.from({ length: itemsInView }, () => false));
@@ -46,12 +51,12 @@
 	description: string[],
 	textRight: boolean = false
 )}
-	<div use:inView={() => (viewElements[viewIndex] = true)} class="w-full md:w-[90%]">
+        <div use:inView={() => (viewElements[viewIndex] = true)} class={["w-full", textRight && 'text-right md:self-end md:-mr-12']}>
 		{#if viewElements[viewIndex]}
 			<div
 				in:fly={slideTransition(0, -100)}
 				out:fly|global={slideTransition(0, -50)}
-				class={['flex flex-col gap-2 md:-ml-8', containerStyles, textRight && 'text-right']}
+				class={['flex flex-col gap-2 md:-ml-12', containerStyles]}
 			>
 				<div class={['flex flex-col gap-1', textRight && 'items-end']}>
 					<div class="tools flex gap-1">
@@ -62,7 +67,7 @@
 					<h4 class="font-semibold">{title}</h4>
 				</div>
 
-				<div transition:fly={flyTransition(100)}>
+				<div class="space-y-2" transition:fly={flyTransition(100)}>
 					{#each description as text}
 						<p>{text}</p>
 					{/each}
@@ -117,7 +122,7 @@
 					</a>
 				</div>
 
-				<section id="whatido" class="space-y-3">
+				<section id="whatido" class="flex flex-col gap-3">
 					{@render infoBox('Web development', FETools, 2, [
 						'I love translating a backend into a responsive UI with a seamless user experience.',
 						'As a modern web developer, I use UI meta frameworks to ensure smooth communication between the frontend and backend, while keeping the codebase modular and developer-friendly.'
@@ -135,7 +140,7 @@
 						true
 					)}
 
-					{@render infoBox('Systems & Customization', [Linux, Windows, Github], 4, [
+					{@render infoBox('Systems & Customization', SysTools, 4, [
 						'I don’t just write code — I run the machine.',
 						'My daily driver is Debian Linux, tuned for performance and coding comfort. I dual boot Windows for Photoshop and gaming.',
 						'I love customizing everything — even my phone is Magisk-rooted to unlock its full potential.'
