@@ -10,7 +10,7 @@
 
         let { data } = $props();
 
-	const itemsInView = 4;
+	const itemsInView = 2;
 	const viewElements = $state(Array.from({ length: itemsInView }, () => false));
 
         let mounted = $state(false);
@@ -21,6 +21,7 @@
                 return () => mounted = false;
         });
 
+        // animation list icons
 	const images = Object.keys(import.meta.glob('$lib/images/list_icons/*.png'));
 	const [min, max] = [0, images.length - 1];
 	const randInt = () => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -31,22 +32,24 @@
 	<meta name="description" content="Project details" />
 </svelte:head>
 
-{#snippet detailBox({ condition, title, data, index }: { condition: boolean, title: string, data: string[] | string, index: number })}
+{#snippet detailBox({ condition, title, data, index }: { condition: boolean, title: string, data: string[] | string | undefined, index?: number })}
 	{#if condition}
-                <div transition:fly={flyTransition()}>
-			<h2 class="glass-effect w-fit rounded-b-none p-2">{title}</h2>
+                <div transition:fly|global={flyTransition()} use:inView={() => (viewElements[index] = true)}>
+                        {#if viewElements[index]}
+                                <h2 class="glass-effect w-fit !rounded-b-none p-2">{title}</h2>
 
-			<div class="glass-effect rounded-tl-none p-2">
-				{#if Array.isArray(data)}
-					<ul>
-						{#each data as item, i}
-							<li transition:fly={slideTransition(i * 1.15)} style={`--list-icon: url(${images[randInt()]})`}>{item}</li>
-						{/each}
-					</ul>
-				{:else}
-					<p transition:fly|global={slideTransition()}>{data}</p>
-				{/if}
-			</div>
+                                <div class="glass-effect !rounded-tl-none p-2">
+                                        {#if Array.isArray(data)}
+                                                <ul>
+                                                        {#each data as item, i}
+                                                                <li transition:fly|global={slideTransition(i * 150, -50)} style={`--list-icon: url(${images[randInt()]})`}>{item}</li>
+                                                        {/each}
+                                                </ul>
+                                        {:else}
+                                                <p transition:fly|global={slideTransition(150, -50)}>{data}</p>
+                                        {/if}
+                                </div>
+                        {/if}
 		</div>
 	{/if}
 {/snippet}
@@ -64,13 +67,15 @@
 	{@render detailBox({
 		title: 'The project provides the following features',
 		data: data.features,
-		condition: data.features
+                condition: !!data.features,
+                index: 0,
 	})}
 
 	{@render detailBox({
 		title: 'Technical details',
 		data: data.technicalDetails,
-		condition: data.technicalDetails
+                condition: !!data.technicalDetails,
+                index: 1,
 	})}
 {/snippet}
 
@@ -87,7 +92,7 @@
                                         aria-label="View live demo"
                                         class={["md:hidden", data.source && "border-r"]}
                                 >
-                                        <Visit size={24} />
+                                        <Visit />
                                 </a>
                         {/if}
 
@@ -101,7 +106,7 @@
                                         aria-label="View source code"
                                         class="md:hidden"
                                 >
-                                        <Github size={24} />
+                                        <Github />
                                 </a>
                         {/if}
                 </div>
@@ -127,14 +132,14 @@
                 </div>
 
                 <!-- desktop view -->
-                <div class="hidden flex-1 md:flex flex-col gap-3">
+                <div class="hidden flex-1 md:flex flex-col gap-3 min-h-0">
                         {@render header()}
-                        <div class="gap-4 overflow-y-hidden flex">
-                                <div class="h-full w-[35%] space-y-4 overflow-y-auto">
+                        <div class="gap-4 overflow-y-auto flex flex-1 min-h-0">
+                                <div class="w-[35%] space-y-4">
                                         {@render infoBox()}
                                 </div>
 
-                                <div class="h-full flex-1 space-y-2 overflow-y-auto rounded px-2">
+                                <div class="flex-1 space-y-2 rounded px-2">
                                         <div class="w-4/6 mx-auto">
                                                 <ImageCarousel images={data.images} />
                                         </div>

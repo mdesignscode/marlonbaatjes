@@ -2,19 +2,15 @@
 	import './styles/hamburger.css';
 	import { Close, WhatsApp, CodePen, Github, LinkedIn } from 'icons';
 	import { page } from '$app/state';
-	import Transition from 'svelte-transition';
 	import { onNavigate } from '$app/navigation';
 	import { store } from 'store';
-	import allProjects from './projects/allProjects';
 	import { createDisclosure } from 'svelte-headlessui';
 	import { fly, slide } from 'svelte/transition';
-
-	let destination = $state('');
 
 	const contactInfo = createDisclosure({ expanded: false });
 	const navbar = createDisclosure({ expanded: false });
 
-	onNavigate((e) => {
+	onNavigate(() => {
 		store.isNavigating = true;
 
 		return new Promise((resolve) => {
