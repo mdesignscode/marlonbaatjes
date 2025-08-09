@@ -22,7 +22,12 @@
         });
 
         // animation list icons
-	const images = Object.keys(import.meta.glob('$lib/images/list_icons/*.png'));
+        const images = Object.values(
+                import.meta.glob(
+                        '$lib/images/list_icons/*.png',
+                        { eager: true, import: "default" }
+                )
+        );
 	const [min, max] = [0, images.length - 1];
 	const randInt = () => Math.floor(Math.random() * (max - min + 1)) + min;
 </script>
