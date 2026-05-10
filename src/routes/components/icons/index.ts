@@ -16,6 +16,7 @@ import JS from "./JS.svelte";
 import LinkedIn from './LinkedIn.svelte';
 import Linux from "./Linux.svelte";
 import Magisk from "./Magisk.svelte";
+import Mail from "./Mail.svelte";
 import Nextjs from "./Nextjs.svelte";
 import Nodejs from './Nodejs.svelte';
 import Nvim from "./Nvim.svelte";
@@ -39,6 +40,6 @@ export {
         Nextjs, React, C, Flask, Jest, Github, TS, Tailwind, JS, SQL,
         WhatsApp, CodePen, Close, Reddit, Connect, LinkedIn, Portfolio,
         Svelte, Express, Nodejs, DoubleArrow, ExternalLink, Windows,
-        Magisk, Android, Zsh,
+        Magisk, Android, Zsh, Mail,
 };
 

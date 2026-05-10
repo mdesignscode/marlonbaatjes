@@ -21,6 +21,8 @@ const config = {
                         store: 'src/utils/store.svelte.ts',
                         utils: 'src/utils/index.ts',
                         inView: 'src/lib/actions/use:inView.svelte.ts',
+                        globalCss: 'src/app.css',
+                        styles: 'src/routes/styles/',
                 }
         }
 };
