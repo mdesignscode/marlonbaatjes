@@ -4,10 +4,50 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#06525c" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,800;1,500&family=Libre+Franklin:ital,wght@0,400;0,600;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<script>
+			// Entrances: content is hidden only while this script runs, and is revealed as it scrolls in.
+			// Lives here (not in a component) so prerendered pages without client JS still reveal.
+			(function () {
+				var root = document.documentElement;
+				if (!('IntersectionObserver' in window)) return;
+				root.classList.add('js');
+				var io = new IntersectionObserver(
+					function (entries) {
+						entries.forEach(function (e) {
+							if (e.isIntersecting) {
+								e.target.classList.add('is-in');
+								io.unobserve(e.target);
+							}
+						});
+					},
+					{ rootMargin: '0px 0px -6% 0px', threshold: 0.01 }
+				);
+				function scan() {
+					document.querySelectorAll('[data-reveal]:not(.is-in)').forEach(function (el) {
+						io.observe(el);
+					});
+				}
+				document.addEventListener('DOMContentLoaded', function () {
+					scan();
+					new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+				});
+				window.addEventListener('beforeprint', function () {
+					document.querySelectorAll('[data-reveal]').forEach(function (el) {
+						el.classList.add('is-in');
+					});
+				});
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
-	<body class="h-[100dvh] overflow-y-hidden" data-sveltekit-preload-data="hover">
+	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
-

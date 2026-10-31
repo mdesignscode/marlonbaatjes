@@ -1,176 +1,340 @@
 <script lang="ts">
-	import { Github, LinkedIn, Portfolio, Mail } from 'icons';
 	import allProjects from '../projects/allProjects';
 
-	const featuredProjects = Object.entries(allProjects)
-		.flatMap(([group, projects]) =>
-			Object.entries(projects).map(([key, data]) => ({ group, key, ...data }))
-		)
-		.filter((p) => p.isFeatured && p.key !== "spots");
-	const { spots } = allProjects.personal
+	// ── Tailor here ────────────────────────────────────────────────────────────
+	// Edit the role, the summary, the skills and which projects show for each application.
+	const role = 'Full-stack developer';
 
-	const skills = {
+	const summary = [
+		'Self-taught full-stack developer building practical, end-to-end software in TypeScript and Python.',
+		'Took my music tool Spots from a Flask API with a React front end to a Python package on PyPI, with caching, retry logic and automated download workflows for speed and reliability.',
+		'Comfortable designing REST APIs, building responsive, accessible front ends and structuring code that stays maintainable.'
+	];
+
+	const skills: Record<string, string[]> = {
 		Languages: ['TypeScript', 'JavaScript', 'Python'],
-		Frontend: [
-			'SvelteKit',
-			'React',
-			'Next.js',
-			'Tailwind CSS',
-			'Responsive Design',
-			'Accessibility (WCAG)'
-		],
-		Backend: [
-			'Flask',
-			'RESTful API Design',
-			'System Design',
-			'Caching & Performance Optimization'
-		],
-		Database: ['Sequelize (SQL)', 'Data Modeling'],
-		Concepts: [
-			'REST APIs',
-			'Caching',
-			'Data Pipelines',
-			'Fault Tolerance',
-			'Performance Optimization'
-		],
-		Other: ['Git / GitHub', 'Linux']
+		Frontend: ['SvelteKit', 'React', 'Next.js', 'Tailwind CSS', 'Responsive design', 'Accessibility (WCAG)'],
+		Backend: ['Flask', 'REST API design', 'System design', 'Caching and performance'],
+		Data: ['Sequelize (SQL)', 'Prisma', 'Data modelling'],
+		Concepts: ['Data pipelines', 'Fault tolerance', 'Performance optimisation'],
+		Tools: ['Git and GitHub', 'Linux (Debian)', 'Photoshop']
 	};
 
-	const urlStyles = 'text-blue-600 underline underline-offset-2';
-	const titleStyles = 'border-b pb-1 text-lg font-semibold';
-	const portfolioUri = 'https://marlonbaatjes.is-a.dev/';
+	const spotsPoints = [
+		'Built and published a Python package installable with pip',
+		'Added a cache that removes redundant API requests',
+		'Designed a CLI workflow that processes whole playlists',
+		'Automated downloading and embedding of metadata, cover art and lyrics'
+	];
+
+	// keys from allProjects to list under "Selected projects", in order
+	const highlighted = ['personal/triviamania', 'personal/randomstuff'];
+
+	const certifications = [
+		'Google IT Support Professional Certificate',
+		'freeCodeCamp Responsive Web Design',
+		'freeCodeCamp JavaScript Algorithms and Data Structures',
+		'freeCodeCamp Front End Development Libraries'
+	];
+	// ───────────────────────────────────────────────────────────────────────────
+
+	const site = 'https://marlonbaatjes.is-a.dev';
+	const { spots } = allProjects.personal;
+
+	const projects = highlighted.map((path) => {
+		const [group, key] = path.split('/') as ['personal', keyof typeof allProjects.personal];
+		return { path, ...(allProjects[group][key] as (typeof allProjects.personal)['spots']) };
+	});
+
+	const contacts = [
+		{ label: 'marlonbaatjes62@gmail.com', href: 'mailto:marlonbaatjes62@gmail.com' },
+		{ label: 'marlonbaatjes.is-a.dev', href: site },
+		{ label: 'github.com/mdesignscode', href: 'https://github.com/mdesignscode' },
+		{ label: 'linkedin.com/in/marlonbaatjes', href: 'https://www.linkedin.com/in/marlonbaatjes' }
+	];
 </script>
 
-<section id="resume" class="mx-auto space-y-2 bg-white px-8 py-10 font-sans text-black">
-	<section class="border-b pb-2">
-		<h1 class="text-xl font-bold">
-			Marlon Baatjes <span class="text-lg">- Full Stack Developer</span>
-		</h1>
-		<section class="contact-info mt-2 flex-wrap flex items-center gap-4">
-			<div class="flex items-center gap-1">
-				<LinkedIn />
-				<a href="https://www.linkedin.com/in/marlonbaatjes" class={urlStyles}
-					>linkedin.com/in/marlonbaatjes</a
-				>
-			</div>
-			<div class="flex items-center gap-1">
-				<Github />
-				<a href="https://github.com/mdesignscode" class={urlStyles}>github.com/mdesignscode</a>
-			</div>
-			<div class="flex items-center gap-1">
-				<Portfolio />
-				<a href={portfolioUri} class={urlStyles}>marlonbaatjes.is-a.dev</a>
-			</div>
-			<div class="flex items-center gap-1">
-				<Mail />
-				<a href="mailto:marlonbaatjes62@gmail.com" class={urlStyles}>marlonbaatjes62@gmail.com</a>
-			</div>
-		</section>
+<svelte:head>
+	<title>Marlon Baatjes · Résumé</title>
+	<meta name="robots" content="noindex" />
+</svelte:head>
+
+<div class="toolbar">
+	<button class="btn" onclick={() => window.print()}>Print or save as PDF</button>
+</div>
+
+<article class="page" aria-label="Résumé of Marlon Baatjes">
+	<header class="top">
+		<div>
+			<h1>Marlon Baatjes</h1>
+			<p class="role">{role}</p>
+		</div>
+		<ul class="contacts">
+			{#each contacts as c}
+				<li><a href={c.href}>{c.label}</a></li>
+			{/each}
+		</ul>
+	</header>
+
+	<section class="summary" aria-label="Summary">
+		{#each summary as line}<p>{line}</p>{/each}
 	</section>
 
-	<p class="border-b-2 pb-2 text-sm">
-		Full-stack developer focused on building practical, end-to-end software systems using JavaScript/TypeScript and Python.
+	<div class="body">
+		<aside class="side">
+			<h2>Skills</h2>
+			{#each Object.entries(skills) as [group, list]}
+				<h3>{group}</h3>
+				<p class="skill-list">{list.join(', ')}</p>
+			{/each}
 
-		Developed and distributed a music management tool (Spots) from a CLI application into a packaged Python library (PyPI), emphasizing performance, reliability, and user experience through caching, retry logic, and automation workflows.
+			<h2 class="certs-title">Certifications</h2>
+			<ul class="certs">
+				{#each certifications as c}<li>{c}</li>{/each}
+			</ul>
+		</aside>
 
-		Experience designing RESTful APIs, building responsive frontends, and architecting systems that solve real-world problems. Strong focus on clean architecture, maintainability, and performance-driven development.
-	</p>
+		<div class="main">
+			<h2>Project experience</h2>
 
-	<div class="flex gap-4">
-		<div class="flex-[0.35] border-r pr-4">
-			<section>
-				<h2 class={titleStyles}>Skills</h2>
-
-				<section class="mt-2 flex flex-col">
-					{#each Object.keys(skills) as category}
-						<h3 class="mt-2 text-base">{category}</h3>
-
-						<ul class="mt-2 flex list-inside list-disc flex-col gap-2 text-xs text-gray-600 pl-2">
-							{#each skills[category as keyof typeof skills] as skill}
-								<li>{skill}</li>
-							{/each}
-						</ul>
-					{/each}
-				</section>
-			</section>
-		</div>
-
-		<div class="flex flex-1 flex-col gap-4">
-			<section>
-				<h2 class={titleStyles}>Project Experience</h2>
-
-        <section class="border-b-2 pb-4 mt-2">
-					<div>
-						<div class="flex items-center gap-3">
-							<h3 class="font-semibold text-base">{spots.title}</h3>
-							<a
-								class="text-xs italic text-gray-400 underline underline-offset-2"
-								href={spots.live}>more details</a
-							>
-						</div>
-						<p class="text-sm text-gray-700">{spots.description}</p>
-						<ul class="list-disc my-2 pl-4 text-gray-600 text-sm">
-							<li>Built and published a Python package installable via <a href="https://pypi.org/project/spots-cli/">pip</a></li>
-							<li>Implemented caching system to eliminate redundant API requests</li>
-							<li>Designed a CLI-based workflow to process and download entire playlists efficiently</li>
-							<li>Automated music download and metadata embedding workflows</li>
-						</ul>
-						<ul class="mt-1 flex flex-wrap gap-2 pr-2 text-xs">
-							{#each spots.techStack as tech}
-								<li class="rounded bg-blue-100 px-1 py-0.5 text-blue-800">{tech}</li>
-							{/each}
-						</ul>
-					</div>
-        </section>
-			</section>
-
-			<section>
-				<h2 class={titleStyles}>Highlighted Projects</h2>
-
-				<section class="mt-2 space-y-4">
-					{#each featuredProjects as project}
-						<div>
-							<div class="flex items-center gap-3">
-								<h3 class="font-semibold text-base">{project.title}</h3>
-								<a
-									class="text-xs italic text-gray-400 underline underline-offset-2"
-									href={`${portfolioUri}projects/${project.group}/${project.key}`}>more details</a
-								>
-							</div>
-							<p class="text-sm text-gray-700">{project.description}</p>
-								
-							<ul class="mt-1 flex flex-wrap gap-2 pr-2 text-xs">
-								{#each project.techStack as tech}
-									<li class="rounded bg-blue-100 px-1 py-0.5 text-blue-800">{tech}</li>
-								{/each}
-							</ul>
-						</div>
-					{/each}
-				</section>
-			</section>
-
-			<section>
-				<h2 class={titleStyles}>Certifications</h2>
-				<ul class="mt-2 list-inside list-disc text-xs text-gray-700">
-					<li>Google IT Support Professional Certificate</li>
-					<li>FreeCodeCamp Responsive Web Design</li>
-					<li>FreeCodeCamp JavaScript Algorithms and Data Structures</li>
-					<li>FreeCodeCamp Front End Development Libraries</li>
+			<section class="project lead-project">
+				<div class="ptitle">
+					<h3>{spots.title}</h3>
+					<a href={spots.live}>pypi.org/project/spots-cli</a>
+				</div>
+				<p>{spots.description}</p>
+				<ul class="points">
+					{#each spotsPoints as pt}<li>{pt}</li>{/each}
 				</ul>
+				<p class="stack">{spots.techStack.join(' · ')}</p>
 			</section>
+
+			<h2 class="sel">Selected projects</h2>
+			{#each projects as p}
+				<section class="project">
+					<div class="ptitle">
+						<h3>{p.title}</h3>
+						<a href={`${site}/projects/${p.path}`}>marlonbaatjes.is-a.dev/projects/{p.path}</a>
+					</div>
+					<p>{p.description.replace('\n', ' ')}</p>
+					<p class="stack">{p.techStack.join(' · ')}</p>
+				</section>
+			{/each}
 		</div>
 	</div>
-</section>
+</article>
 
 <style>
-	#resume {
-		font-size: 12px;
+	.toolbar {
 		width: 210mm;
-		height: 297mm;
+		max-width: 100%;
+		margin: 0 auto 16px;
+		display: flex;
+		justify-content: flex-end;
 	}
 
-	:global(.contact-info svg) {
-		@apply size-4;
+	/* the A4 sheet: teal ink on white paper */
+	.page {
+		width: 210mm;
+		min-height: 297mm;
+		max-width: 100%;
+		margin: 0 auto;
+		background: #fff;
+		color: var(--ink);
+		padding: 14mm 15mm 12mm;
+		font-size: 9.6pt;
+		line-height: 1.45;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
+	.top {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 8mm;
+		padding-bottom: 6mm;
+		border-bottom: 2.5pt solid var(--ink);
+	}
+
+	h1 {
+		font-size: 30pt;
+		line-height: 0.95;
+	}
+
+	.role {
+		margin-top: 2mm;
+		font-family: var(--display);
+		font-style: italic;
+		font-weight: 500;
+		font-size: 14pt;
+	}
+
+	.contacts {
+		text-align: right;
+		font-size: 8.8pt;
+		line-height: 1.6;
+	}
+
+	.contacts a,
+	.ptitle a {
+		text-decoration: none;
+	}
+
+	.contacts a:hover,
+	.ptitle a:hover {
+		text-decoration: underline;
+	}
+
+	.summary {
+		margin-top: 5mm;
+		font-size: 10.2pt;
+		line-height: 1.5;
+	}
+
+	.summary p + p {
+		margin-top: 1.5mm;
+	}
+
+	.body {
+		margin-top: 6mm;
+		display: grid;
+		grid-template-columns: 52mm 1fr;
+		gap: 8mm;
+	}
+
+	.side {
+		background: var(--surface);
+		padding: 5mm;
+		align-self: start;
+	}
+
+	h2 {
+		font-size: 13pt;
+		line-height: 1;
+		margin-bottom: 3mm;
+	}
+
+	h3 {
+		font-family: var(--text);
+		font-weight: 600;
+		letter-spacing: 0;
+		line-height: 1.2;
+		font-size: 10pt;
+	}
+
+	.side h3 {
+		margin-top: 3mm;
+		font-size: 9pt;
+	}
+
+	.skill-list {
+		margin-top: 0.5mm;
+		font-size: 8.8pt;
+	}
+
+	.certs-title {
+		margin-top: 6mm;
+	}
+
+	.certs {
+		font-size: 8.8pt;
+		display: grid;
+		gap: 1.5mm;
+	}
+
+	.project {
+		break-inside: avoid;
+	}
+
+	.project + .project {
+		margin-top: 4.5mm;
+	}
+
+	.lead-project {
+		background: var(--surface);
+		padding: 4mm 5mm;
+	}
+
+	.ptitle {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 4mm;
+	}
+
+	.ptitle h3 {
+		font-family: var(--display);
+		font-weight: 800;
+		font-size: 12pt;
+	}
+
+	.ptitle a {
+		font-size: 8.2pt;
+		color: var(--muted);
+	}
+
+	.project p {
+		margin-top: 1.5mm;
+	}
+
+	.points {
+		margin-top: 2mm;
+		padding-left: 4mm;
+		list-style: square;
+	}
+
+	.points li + li {
+		margin-top: 0.8mm;
+	}
+
+	.stack {
+		font-size: 8.4pt;
+		font-weight: 600;
+	}
+
+	.sel {
+		margin-top: 6mm;
+	}
+
+	@media screen and (max-width: 820px) {
+		.page {
+			width: auto;
+			min-height: 0;
+			padding: 24px 20px;
+			font-size: 15px;
+		}
+
+		.top,
+		.ptitle {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.contacts {
+			text-align: left;
+		}
+
+		.body {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media print {
+		@page {
+			size: A4;
+			margin: 0;
+		}
+
+		.toolbar {
+			display: none;
+		}
+
+		.page {
+			width: 210mm;
+			min-height: 0;
+			height: 297mm;
+			overflow: hidden;
+		}
 	}
 </style>
-

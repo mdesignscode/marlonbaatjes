@@ -1,164 +1,124 @@
 <script lang="ts">
-	import './styles/hamburger.css';
-	import { Close, WhatsApp, CodePen, Github, LinkedIn } from 'icons';
 	import { page } from '$app/state';
-	import { onNavigate } from '$app/navigation';
-	import { store } from 'store';
-	import { createDisclosure } from 'svelte-headlessui';
-	import { fly, slide } from 'svelte/transition';
-
-	const contactInfo = createDisclosure({ expanded: false });
-	const navbar = createDisclosure({ expanded: false });
-
-	onNavigate(() => {
-		store.isNavigating = true;
-
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				resolve();
-			}, 500);
-		});
-	});
 
 	const links = [
-		{ title: 'Home', url: '/' },
-		{ title: 'Projects', url: '/projects' }
+		{ title: 'Work', url: '/#work' },
+		{ title: 'Projects', url: '/projects' },
+		{ title: 'Cover art', url: '/#covers' }
 	];
 
-	const socialLinks = [
-		{
-			label: "Visit developer's github profile",
-			href: 'https://github.com/mdesignscode',
-			icon: Github
-		},
-		{
-			label: "Visit Marlon's LinkedIn Profile",
-			href: 'https://www.linkedin.com/in/marlonbaatjes',
-			icon: LinkedIn
-		},
-		{
-			label: 'Chat on WhatsApp',
-			href: 'https://wa.me/+27790226755',
-			icon: WhatsApp
-		},
-		{
-			label: "View Marlon's CodePen's",
-			href: 'https://codepen.io/Marlon-B',
-			icon: CodePen
-		}
-	];
+	const current = (url: string) =>
+		url === '/projects' && page.url.pathname.startsWith('/projects') ? 'page' : undefined;
 </script>
 
-{#if $contactInfo.expanded}
-	<section
-		use:contactInfo.panel
-		class="glass-effect absolute bottom-[14%] right-1/2 z-50 flex w-fit translate-x-1/2 items-center gap-2 p-2"
-		id="social-links"
-	>
-		{#each socialLinks as { label, href, icon }, i}
-			<a
-				transition:slide|global={{ delay: i * 150 }}
-				aria-label={label}
-				{href}
-				target="_blank"
-			>
-				<svelte:component this={icon} />
-			</a>
-		{/each}
-		<button
-                        transition:slide={{ delay: 600 }}
-			use:contactInfo.button
-			aria-label="Close social links"
-			class="size-8 [writing-mode:sideways-lr]"><Close /></button
-		>
-	</section>
-{/if}
+<header>
+	<div class="bar wrap">
+		<a class="mark" href="/" aria-label="Marlon Baatjes, home">
+			<span class="mono" aria-hidden="true">MB</span>
+			<span class="name">Marlon Baatjes</span>
+		</a>
 
-<header
-        class={["glass-effect transition-all absolute bottom-[4%] right-8 z-[9999] flex flex-row-reverse", $navbar.expanded && "w-5/6 md:w-auto"]}
->
-	<button
-		use:navbar.button
-		aria-label={$navbar.expanded ? 'Close navigation' : 'Open navigation'}
-		class={['hamburger hamburger--emphatic relative z-50 print:hidden', $navbar.expanded && 'is-active']}
-		type="button"
-	>
-		<span class="hamburger-box grid place-items-center">
-			<span class="hamburger-inner"></span>
-		</span>
-	</button>
-
-	{#if $navbar.expanded}
-                <nav class="overflow-x-auto overflow-y-hidden text-white">
-			<ul class="flex gap-4 px-4">
-				{#each links as link, index}
-					<li
-						transition:fly|global={{ x: 100, delay: index * 100 }}
-                                                aria-current={new RegExp(`${link.url}(?=\/|$)`).test(page.url.pathname) ? 'page' : undefined}
-					>
-						<a href={link.url}>{link.title}</a>
+		<nav aria-label="Main">
+			<ul>
+				{#each links as link}
+					<li class:keep={link.url === '/projects'}>
+						<a href={link.url} aria-current={current(link.url)}>{link.title}</a>
 					</li>
 				{/each}
-
-                                <button
-                                        use:contactInfo.button
-					transition:fly|global={{ x: 100, delay: 350 }}
-                                        >Contact</button>
 			</ul>
 		</nav>
-	{/if}
+
+		<a class="btn btn--paper" href="/#contact">Get in touch</a>
+	</div>
 </header>
 
 <style>
-	:global(#social-links svg) {
-		@apply size-8 text-white;
-	}
-
-	ul,
-	li {
-		height: 100%;
-	}
-
-	li {
-		@apply relative grid place-items-center;
-	}
-
-	a {
-		@apply relative translate-y-0 transition-transform;
-	}
-
-	li::after {
-		@apply absolute left-1/2 -z-10 size-12 -translate-x-1 translate-y-6 opacity-0 transition-all;
-		content: '';
-		background-image: url('/marlon_avatar.png');
-		background-size: 15px auto;
-		background-repeat: no-repeat;
-	}
-
-	li[aria-current='page']::after {
-		@apply translate-y-1 opacity-100;
-	}
-
-	li[aria-current='page'] a {
-		@apply translate-y-3;
-	}
-
 	header {
-		animation: animateIn 1s ease forwards;
+		position: relative;
+		z-index: 2;
+		background: var(--field-1);
+		color: var(--field-1-ink);
 	}
 
-	@keyframes animateIn {
-		0% {
-			opacity: 0;
-			scale: 2;
-			filter: blur(4px);
+	.bar {
+		height: 76px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	.mark {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: var(--step-small);
+	}
+
+	.mono {
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--bg);
+		color: var(--ink);
+		font-family: var(--display);
+		font-weight: 800;
+		font-size: var(--step-small);
+		letter-spacing: -0.02em;
+		transition: transform 300ms var(--ease-out);
+	}
+
+	.mark:hover .mono {
+		transform: rotate(-12deg);
+	}
+
+	ul {
+		display: flex;
+		gap: clamp(16px, 3vw, 44px);
+	}
+
+	nav a {
+		font-size: var(--step-small);
+		font-weight: 600;
+		text-decoration: none;
+		padding-block: 12px;
+		position: relative;
+	}
+
+	nav a::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 6px;
+		height: 2px;
+		background: currentColor;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 240ms var(--ease-out);
+	}
+
+	nav a:hover::after,
+	nav a[aria-current='page']::after {
+		transform: scaleX(1);
+	}
+
+	@media (max-width: 720px) {
+		.name {
+			display: none;
 		}
 
-		100% {
-			opacity: 1;
-			scale: 1;
-			filter: blur(px);
+		li:not(.keep) {
+			display: none;
+		}
+
+		.bar {
+			height: 68px;
+			gap: 12px;
 		}
 	}
 </style>
-

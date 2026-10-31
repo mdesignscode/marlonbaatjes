@@ -1,4 +1,4 @@
-type TProjectInfo = {
+export type TProjectInfo = {
 	live?: string;
 	source?: string;
 	preview: string;

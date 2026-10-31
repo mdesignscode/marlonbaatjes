@@ -1,26 +1,41 @@
 <script lang="ts">
-	import { ImageLibrary } from 'components';
-	import Header from './Header.svelte';
 	import '../app.css';
-        import { page } from '$app/state';
-
-        const isResumePage = new RegExp('/resume(?=\/|$)').test(page.url.pathname)
+	import { page } from '$app/state';
+	import Header from './Header.svelte';
+	import Footer from './Footer.svelte';
 
 	let { children } = $props();
+
+	// the résumé is a bare A4 sheet: no site chrome
+	const bare = $derived(/^\/resume(\/|$)/.test(page.url.pathname));
 </script>
 
-<div class="h-dvh overflow-y-auto bg-vanilla text-coffee">
-        {#if isResumePage}
+{#if bare}
+	{@render children()}
+{:else}
+	<a class="skip btn btn--paper" href="#main">Skip to content</a>
+	<Header />
+	<main id="main">
 		{@render children()}
-        {:else}
-                <ImageLibrary />
-                <Header />
-                <main>
-                        {@render children()}
-                </main>
-        {/if}
-</div>
+	</main>
+	<Footer />
+{/if}
 
 <style>
-</style>
+	.skip {
+		position: absolute;
+		left: var(--margin);
+		top: -80px;
+		z-index: 10;
+	}
 
+	.skip:focus {
+		top: 12px;
+	}
+
+	main {
+		position: relative;
+		z-index: 1;
+		background: var(--bg);
+	}
+</style>
