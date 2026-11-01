@@ -11,7 +11,7 @@
 		return { artist: q.slice(0, i).trim(), title: q.slice(i + 3).trim() };
 	});
 
-	const command = $derived(`spots download "${query.trim()}"`);
+	const command = $derived(`spots_cli download "${query.trim()}"`);
 
 	async function copy() {
 		try {
@@ -25,19 +25,19 @@
 
 	const slips = [
 		{
-			head: 'spots setup',
+			head: 'spots_cli setup',
 			lines: ['Asks a few questions', 'Writes your config folder', 'Turns Spotify, YouTube and the other providers on or off']
 		},
 		{
-			head: 'spots migrate-likes',
+			head: 'spots_cli migrate-likes',
 			lines: ['Reads your liked songs on Spotify', 'Finds each one on YouTube', 'Likes it there too', 'More providers to come']
 		},
 		{
-			head: 'spots add-to-history',
+			head: 'spots_cli add-to-history',
 			lines: ['Points at a music folder', 'Records every song in it', 'So nothing downloads twice']
 		},
 		{
-			head: 'spots remove-duplicates',
+			head: 'spots_cli remove-duplicates',
 			lines: ['Scans a folder', 'Finds the same song saved twice', 'Keeps one copy']
 		},
 		{
@@ -64,8 +64,8 @@
 			YouTube, downloads it and tags it.
 		</p>
 		<p data-reveal style="--d: 160ms">
-			It began as a Flask API with a React front end. I rebuilt it as one install with one
-			command.
+			It began as a Flask API with a React front end. I rebuilt the core as one install with one
+			command, then put the API and a new web UI back on top. It saves videos too.
 		</p>
 		<div class="links" data-reveal style="--d: 240ms">
 			<a class="link" href="https://pypi.org/project/spots-cli/" target="_blank" rel="noreferrer">Spots on PyPI</a>
@@ -76,7 +76,7 @@
 
 	<div class="slips">
 		<form class="slip slip--live" onsubmit={(e) => { e.preventDefault(); copy(); }}>
-			<label class="head" for="track">spots download</label>
+			<label class="head" for="track">spots_cli download</label>
 			<input id="track" bind:value={query} autocomplete="off" spellcheck="false" aria-describedby="track-out" />
 			<p class="div" aria-hidden="true">- - - - - - - - - - - - -</p>
 			<div id="track-out" aria-live="polite">

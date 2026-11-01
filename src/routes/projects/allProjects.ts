@@ -32,32 +32,40 @@ const allProjects = {
 			live: "https://pypi.org/project/spots-cli/",
 			preview: '/projects/personal/spots/Spots.png',
 			title: 'Spots',
-			summary: 'A PyPI-distributed CLI tool for downloading and organizing music from Spotify and YouTube.',
+			summary:
+				'A Python package on PyPI that downloads music and video from Spotify and YouTube, with a CLI, a Flask API and a React web UI.',
 			description:
-				'A Python package that provides a simple CLI for downloading, organizing, and enriching music from Spotify and YouTube. What was originally a multi-service full-stack application was redesigned into a lightweight, installable tool focused on usability, performance, and minimal setup.',
+				'Spots takes a Spotify or YouTube link, or plain search terms, and matches each song across Spotify, Deezer and YouTube. It saves the song as an mp3 tagged with cover art, album, year and lyrics, or saves the video as an mp4 at the resolution you pick.\nThe core is one installable library, used three ways: the spots_cli command, a Flask API, and a React web UI that runs on top of the API. It started as a Flask app with a React front end. I rebuilt the core as a package first, then put the API and the UI back on top of it.',
 			techStack: [
 				'Python',
-				'Beautiful Soup',
-				'Moviepy',
-				'YT-dlp',
+				'Typer',
+				'Flask',
+				'yt-dlp',
+				'Spotipy',
+				'Deezer API',
 				'Lyrics Genius',
-				'Spotipy'
+				'Mutagen',
+				'pytest',
+				'React',
+				'esbuild'
 			],
 			features: [
-				'Installable via pip with a simple CLI interface (spots download ...)',
-				'Download tracks, playlists, and liked songs from Spotify and YouTube',
-				'Automatic metadata enrichment (cover art, lyrics, track info)',
-				'Local caching system to avoid redundant processing and API calls',
-				'Download history tracking to prevent duplicates',
-				'Retry logic for resilient downloads in unstable network conditions'
+				'Install with pip install spots-cli, then run spots_cli download "Artist - Title" or paste a link',
+				'Downloads single songs, playlists, albums and an artist\'s tracks as tagged mp3s',
+				'Downloads any YouTube video as mp4, listing each resolution with its file size first',
+				'Web UI: one field for links or search terms, a checklist to pick which playlist tracks to download, and a status on every row',
+				'Flags tracks with no metadata match and lists videos that are unavailable, instead of skipping them silently',
+				'Keeps a download history so nothing downloads twice, and can migrate your Spotify likes to YouTube'
 			],
 			technicalDetails: [
-				'Refactored a full-stack architecture (Flask API + React UI) into a standalone Python package distributed via PyPI',
-				'Designed a clean CLI interface to replace manual API interaction and multi-service setup',
-				'Implemented package initialization logic to handle configuration and environment setup automatically',
-				'Built a metadata processing pipeline: Spotify API → YouTube search → filtering → download → enrichment',
-				'Added persistent caching and history systems to optimize repeated operations and ensure idempotency',
-				'Improved developer experience by eliminating the need for manual environment configuration and multiple running services'
+				'One library behind three interfaces: a dependency container wires the provider clients, the domain logic and a Spots facade that the CLI and the API both call',
+				'Matching pipeline: provider metadata → YouTube search → scoring and filtering → download → tagging, with fallbacks when a provider fails',
+				'Detects a JavaScript runtime (Deno, Bun, Node or QuickJS) at startup so yt-dlp can solve YouTube\'s download challenges, which fixed a wave of HTTP 403 errors',
+				'A cache skips repeat API calls, and retries with backoff handle a dropping network',
+				'The Flask API validates every request and returns clear errors, such as listing the resolutions that do exist when a requested one does not',
+				'The web UI is React bundled by esbuild to ES6, so it still runs in older browsers, and it downloads playlist tracks one at a time because the API shares one yt-dlp client',
+				'Bring your own credentials: Spotify, Genius and Google keys live in a per-user config folder, never in the package',
+				'79 pytest tests cover the library, the CLI and the API, run on an isolated config folder'
 			],
 			images: [
 				'/projects/personal/spots/Spots.png',
